@@ -1,0 +1,1172 @@
+meta:
+  schema_version: "1.0"
+  extraction_mode: "comprehensive_visual_design_system"
+  source_count: 4
+  source_types:
+    - "reference_image"
+  generated_for: "ui_ux_brand_motion_creative_direction"
+  validation:
+    yaml_only: true
+    parser_validated: true
+    markdown_fences: false
+source_analysis:
+  observed:
+    - "Deep lacquer-black cars with reflective highlights and green undertones."
+    - "Oxidized brass, bronze, and copper surfaces recur in wheels, spheres, frames, chandelier, and firelight."
+    - "Warm ivory plaster, aged wood, dust, grime, water, flowers, and smoke create a tactile high-friction world."
+    - "The images use close, cinematic framing with heavy shadows, amber grading, and dense material contrast."
+  inferred:
+    - "The interface should feel like an artifact on a worn desk: dark, polished, metallic, warm, and serious."
+    - "Panels should use layered bezels, fine highlights, and material contrast rather than flat cards."
+    - "Progress and status should feel like a decision dossier rather than a consumer survey."
+  speculative:
+    - "Subtle amber focus states and oxide-green shadows can translate the photographic lighting into UI state language."
+  source_inventory:
+    images:
+      - "Kiren_Srinivasan_something_really_random_--sref_8260849506_ht_5280db3b-d7c7-47df-9fdb-1dab9d8d7ece_0.png"
+      - "Kiren_Srinivasan_something_really_random_--sref_8260849506_ht_5280db3b-d7c7-47df-9fdb-1dab9d8d7ece_1.png"
+      - "Kiren_Srinivasan_something_really_random_--sref_8260849506_ht_5280db3b-d7c7-47df-9fdb-1dab9d8d7ece_2.png"
+      - "Kiren_Srinivasan_something_really_random_--sref_8260849506_ht_5280db3b-d7c7-47df-9fdb-1dab9d8d7ece_3.png"
+    visible_text: []
+    visible_interfaces: []
+    visible_people_or_characters:
+      - "One close portrait with direct gaze, glossy makeup, dark wardrobe, and metallic bow-like shapes."
+    visible_environments:
+      - "Aged interior with car, chandelier, framed art, warm plaster, damaged objects, water, smoke, and fire."
+      - "Outdoor overgrown car surface with wilted flowers, mud, leaves, metal trim, and tinted glass."
+    visible_brand_marks:
+      - "Car emblems are visible as object marks, not as a design-system brand source."
+  evidence_boundaries:
+    directly_observed:
+      - "Colors, material finishes, lighting direction, photographic density, and tactile decay are directly visible."
+    inferred_from_visual_cues:
+      - "UI hierarchy, interaction states, and responsive behavior are extrapolated from the visual language."
+    low_confidence_extrapolations:
+      - "Motion and sound are inferred from fire, water, smoke, reflective metal, and decision-workflow needs."
+confidence_scores:
+  overall: high
+  color_system: high
+  typography: medium
+  layout: medium
+  motion: low
+  cinematic_language: high
+  ui_patterns: medium
+  worldbuilding: high
+design_principles:
+  core_tenets:
+    - "High-friction editorial luxury: every control feels deliberate, weighted, and consequential."
+    - "Dark lacquer surfaces carry the work; warm ivory and brass create legible contrast."
+    - "Information appears as a dossier, not a decorative dashboard."
+  hierarchy_rules:
+    - "One dominant active-question panel on desktop."
+    - "Side rails carry evidence, trail, context, and export without competing with the question."
+    - "Mobile uses tabs to preserve focus and prevent stacked-panel fatigue."
+  consistency_rules:
+    - "Use one shared metallic accent vocabulary for actions, focus, and active states."
+    - "Use one shared dark material vocabulary for shells, panels, inputs, and previews."
+  contrast_rules:
+    - "Ivory text on lacquer surfaces for primary reading."
+    - "Muted brass and olive for secondary metadata."
+    - "Amber fire only for attention, warning, and active decision pressure."
+  restraint_rules:
+    - "No literal car imagery in the UI."
+    - "No decorative flames, flowers, or chandeliers."
+    - "Texture remains CSS-only and subordinate to readability."
+  confidence: high
+  inference_basis: "Grounded in recurring lacquer, brass, ivory, aged wood, smoke, water, and close cinematic framing across all four images."
+brand_identity:
+  positioning: "A serious decision instrument for interrogating plans until they become durable artifacts."
+  personality_traits:
+    - "exacting"
+    - "cinematic"
+    - "tactile"
+    - "worn-in"
+    - "decisive"
+  audience:
+    - "operators shaping product, research, engineering, or strategy decisions"
+    - "agents that need a structured interview surface and artifact trail"
+  value_signals:
+    - "run-scoped evidence"
+    - "visible recommendations"
+    - "decision trail"
+    - "artifact export"
+  trust_signals:
+    - "source-of-truth state"
+    - "validation affordances"
+    - "research notes"
+    - "ADR creation path"
+  differentiation:
+    - "Feels like a rigorous interrogation room rather than a generic survey builder."
+  confidence: medium
+  inference_basis: "The reference images imply seriousness, material richness, and narrative tension; product positioning is extrapolated for the questionnaire workflow."
+character_identity:
+  applicability: "applicable"
+  archetypes:
+    - "calm interrogator"
+    - "archivist"
+    - "decision mechanic"
+  role_in_system:
+    - "The interface holds tension while the agent asks precise questions."
+  personality_cues:
+    - "direct gaze"
+    - "polished surfaces"
+    - "controlled chaos"
+  social_positioning:
+    - "premium expert tool, not a friendly onboarding toy"
+  grooming_and_presentation:
+    - "crisp typography, narrow labels, warm highlights, and dark polished panels"
+  confidence: medium
+  inference_basis: "Character interpretation comes from the portrait's direct gaze and the broader tense, opulent atmosphere."
+art_direction:
+  art_direction_summary: "Dark lacquer dossier with oxidized brass controls, warm ivory reading planes, olive shadows, film grain, and cinematic material density."
+  references_to_visual_cues:
+    - "black reflective car paint"
+    - "bronze spheres and frames"
+    - "warm plaster walls"
+    - "smoke and fire glow"
+    - "wilted flowers and mud texture"
+  production_value: "high-touch editorial product UI"
+  cultural_references: []
+  tactile_feel:
+    - "lacquer"
+    - "oxidized metal"
+    - "aged paper"
+    - "worn leather"
+    - "wet stone"
+  sensory_implications:
+    - "warm light against cool dark surfaces"
+    - "fine scratches and dust under polished highlights"
+  confidence: high
+  inference_basis: "Directly visible material and lighting language across all references."
+visual_language:
+  shape_language:
+    - "rectilinear panels with softened 10px to 18px corners"
+    - "thin brass dividers"
+    - "compact circular status marks"
+    - "long editorial columns"
+  line_quality:
+    - "fine hairlines"
+    - "subtle inset highlights"
+    - "worn edge treatments"
+  density: "controlled-dense, with a large central focus area and compact side rails"
+  balance: "asymmetric desktop triad, tabbed mobile focus"
+  rhythm: "slow editorial scan with sharp decision checkpoints"
+  contrast: "high luminance contrast plus warm metallic accent contrast"
+  motif_library:
+    - "lacquer plate"
+    - "brass tag"
+    - "archive rail"
+    - "burnished focus ring"
+    - "grain veil"
+  confidence: high
+  inference_basis: "Panels and controls map from visible frames, trim, reflective surfaces, and layered interiors."
+color_system:
+  primary:
+    lacquer_black:
+      hex: "#06120D"
+      rgb: "6, 18, 13"
+      hsl: "150, 50%, 5%"
+      usage: "main app background and deep panel core"
+      confidence: high
+      inference_basis: "Visible dark car paint and shadowed wardrobe carry a green-black cast."
+    petrol_green:
+      hex: "#0F3028"
+      rgb: "15, 48, 40"
+      hsl: "165, 52%, 12%"
+      usage: "secondary panels, selected surfaces, deep hover states"
+      confidence: high
+      inference_basis: "Car body and tinted glass show dark green and teal undertones."
+  secondary:
+    oxidized_brass:
+      hex: "#9B6A32"
+      rgb: "155, 106, 50"
+      hsl: "32, 51%, 40%"
+      usage: "primary actions, active rails, badges, decision emphasis"
+      confidence: high
+      inference_basis: "Metal wheels, chandelier, frames, and bronze spheres repeat this family."
+    old_wood:
+      hex: "#5A2F16"
+      rgb: "90, 47, 22"
+      hsl: "22, 61%, 22%"
+      usage: "pressed states, dividers, destructive-adjacent warmth"
+      confidence: high
+      inference_basis: "Door panels, carved interior wood, and smoke-darkened furniture."
+  neutrals:
+    warm_ivory:
+      hex: "#E9D8AF"
+      rgb: "233, 216, 175"
+      hsl: "42, 57%, 80%"
+      usage: "primary text on dark surfaces and light panels"
+      confidence: high
+      inference_basis: "Warm plaster, flowers, porcelain bowl, and paper highlights."
+    tarnished_parchment:
+      hex: "#B99D67"
+      rgb: "185, 157, 103"
+      hsl: "40, 37%, 56%"
+      usage: "secondary text, metadata, muted labels"
+      confidence: high
+      inference_basis: "Aged wall, dried flowers, and dust."
+    smoked_olive:
+      hex: "#4B5633"
+      rgb: "75, 86, 51"
+      hsl: "79, 26%, 27%"
+      usage: "quiet surfaces, disabled states, background haze"
+      confidence: medium
+      inference_basis: "Olive shadows in foliage, wall cast, and background gradients."
+  accents:
+    fire_amber:
+      hex: "#E07A24"
+      rgb: "224, 122, 36"
+      hsl: "27, 75%, 51%"
+      usage: "warning, active pressure, urgent research-needed state"
+      confidence: high
+      inference_basis: "Fire and lamp glow create saturated orange highlights."
+    porcelain_highlight:
+      hex: "#F4E9C8"
+      rgb: "244, 233, 200"
+      hsl: "45, 67%, 87%"
+      usage: "focus outline, selected answer glow, highlight text"
+      confidence: high
+      inference_basis: "Bowl rim, flowers, glare on car paint, and wall highlights."
+  semantic:
+    success:
+      hex: "#7F9256"
+      rgb: "127, 146, 86"
+      hsl: "79, 26%, 45%"
+      usage: "validated state and completed decisions"
+      confidence: medium
+      inference_basis: "Foliage greens adapted into accessible semantic success."
+    error:
+      hex: "#B5482B"
+      rgb: "181, 72, 43"
+      hsl: "13, 62%, 44%"
+      usage: "invalid state and blocking validation"
+      confidence: medium
+      inference_basis: "Fire, rust, and damaged-object tones mapped to error."
+    info:
+      hex: "#5C7D76"
+      rgb: "92, 125, 118"
+      hsl: "167, 15%, 43%"
+      usage: "research notes and context links"
+      confidence: medium
+      inference_basis: "Tinted glass and petrol reflections."
+  tonal_scales:
+    surface:
+      value: "lacquer_black -> petrol_green -> smoked_olive -> tarnished_parchment -> porcelain_highlight"
+      usage: "dark-first tonal progression"
+      confidence: high
+      inference_basis: "Extracted from visible dark-to-warm material ladder."
+  contrast_hierarchy:
+    - "Primary reading: warm_ivory on lacquer_black."
+    - "Secondary metadata: tarnished_parchment on petrol_green."
+    - "Action emphasis: oxidized_brass on lacquer_black with porcelain_highlight focus."
+  atmospheric_grading:
+    - "amber midtones"
+    - "green-black shadows"
+    - "ivory highlights"
+  lut_cues:
+    - "warm cinematic interior grade"
+    - "muted olive shadow rolloff"
+  accessibility_notes:
+    - "Use amber and brass with text labels, not color alone."
+    - "Keep body text on dark panels at high contrast."
+typography:
+  font_families:
+    observed_or_implied:
+      - "No readable typography is visible; typography is inferred from ornate frames, editorial interiors, and archive-like mood."
+    primary:
+      family: "Georgia"
+      classification: "system serif"
+      fallback_stack:
+        - "Georgia"
+        - "Times New Roman"
+        - "serif"
+      visual_grounding: "Ornate frames, aged interiors, and editorial luxury imply a serif headline voice."
+      confidence: medium
+      inference_basis: "Typeface choice is extrapolated because no UI typography appears in the references."
+    supporting:
+      family: "Aptos"
+      classification: "system humanist sans"
+      fallback_stack:
+        - "Aptos"
+        - "Segoe UI"
+        - "system-ui"
+        - "sans-serif"
+      pairing_logic: "A restrained system sans keeps dense questionnaire controls legible beside serif headings."
+      visual_grounding: "Precise product controls need a calmer counterpoint to the ornate visual world."
+      confidence: medium
+      inference_basis: "Chosen for self-contained system availability and product UI readability."
+    rare_unique_candidates:
+      - family: "Canela"
+        role: "editorial display candidate"
+        classification: "high-contrast serif"
+        fallback_stack:
+          - "Georgia"
+          - "Times New Roman"
+          - "serif"
+        pairs_well_with:
+          - "Aptos"
+          - "Segoe UI"
+          - "system-ui"
+        visual_grounding: "The ornate mirrors, wood carving, and warm plaster suggest a high-contrast editorial serif."
+        rarity_reason: "More distinctive than default web serif choices and aligned with luxury editorial tone."
+        pairing_logic: "Use for sparse titles only; pair with a legible sans for controls."
+        use_constraints: "Do not require this font in the self-contained template; use as art-direction guidance only."
+        confidence: low
+        inference_basis: "Candidate inferred from visual mood, not observed text."
+      - family: "GT Sectra"
+        role: "sharp decision-title candidate"
+        classification: "contemporary serif"
+        fallback_stack:
+          - "Georgia"
+          - "Times New Roman"
+          - "serif"
+        pairs_well_with:
+          - "Aptos"
+          - "Segoe UI"
+          - "system-ui"
+        visual_grounding: "Sharp reflections and antique frames call for tension between old material and precise UI."
+        rarity_reason: "Distinctive editorial flavor without default survey-tool softness."
+        pairing_logic: "Use for question headlines with compact sans metadata."
+        use_constraints: "External font loading is not allowed in the bundled template."
+        confidence: low
+        inference_basis: "Candidate inferred from material contrast and product use case."
+  type_scale:
+    display:
+      value: "40px desktop, 30px mobile"
+      usage: "active question heading"
+      confidence: medium
+      inference_basis: "Large central panel needs editorial dominance without overwhelming controls."
+    heading:
+      value: "22px"
+      usage: "rail section headings"
+      confidence: medium
+      inference_basis: "Dense side rails require compact hierarchy."
+    body:
+      value: "16px"
+      usage: "answers, explanations, transcript text"
+      confidence: high
+      inference_basis: "Readable product UI baseline."
+    caption:
+      value: "12px"
+      usage: "metadata, timestamps, tags"
+      confidence: high
+      inference_basis: "Archive-style labels and product metadata."
+    microcopy:
+      value: "11px uppercase"
+      usage: "eyebrows, status codes"
+      confidence: medium
+      inference_basis: "Fine metallic labels echo object plaques and frame details."
+  hierarchy:
+    headline_rules:
+      - "Question prompt is the largest typographic element."
+      - "Recommended answer follows in body scale with brass title."
+    body_rules:
+      - "Keep paragraphs short and line length under 72 characters."
+    label_rules:
+      - "Use uppercase micro labels sparingly for state and section headers."
+    emphasis_rules:
+      - "Use weight and brass color, not gradient text."
+  weights:
+    regular:
+      value: "400"
+      usage: "body"
+      confidence: high
+      inference_basis: "Comfortable reading."
+    semibold:
+      value: "650"
+      usage: "labels and controls"
+      confidence: medium
+      inference_basis: "Dense UI needs sturdy control labels."
+  leading:
+    body:
+      value: "1.55"
+      usage: "answers and rationale"
+      confidence: high
+      inference_basis: "Readable long-form answers."
+    compact:
+      value: "1.25"
+      usage: "labels and rail rows"
+      confidence: medium
+      inference_basis: "Compact metadata."
+  tracking:
+    labels:
+      value: "0.11em"
+      usage: "uppercase micro labels"
+      confidence: medium
+      inference_basis: "Plaque-like label rhythm."
+  editorial_tone: "precise, archival, serious, and warm"
+  accessibility:
+    - "Never set body text below 15px."
+    - "Keep question prompts wrapping naturally on mobile."
+spacing:
+  base_unit: "4px"
+  scale:
+    xs:
+      value: "4px"
+      usage: "hairline gaps"
+      confidence: high
+      inference_basis: "Fine frame and trim details."
+    sm:
+      value: "8px"
+      usage: "control inner gaps"
+      confidence: high
+      inference_basis: "Product UI compactness."
+    md:
+      value: "16px"
+      usage: "field spacing"
+      confidence: high
+      inference_basis: "Readable form rhythm."
+    lg:
+      value: "24px"
+      usage: "panel padding"
+      confidence: high
+      inference_basis: "Breathing room inside dense artifact."
+    xl:
+      value: "40px"
+      usage: "desktop gutters"
+      confidence: medium
+      inference_basis: "Three-zone composition requires separation."
+  component_spacing:
+    answer_options:
+      value: "10px"
+      usage: "option stack"
+      confidence: high
+      inference_basis: "Touch and scan affordance."
+    rail_items:
+      value: "12px"
+      usage: "decision and research rows"
+      confidence: medium
+      inference_basis: "Archive-list density."
+  section_spacing:
+    desktop_shell:
+      value: "20px"
+      usage: "three-zone gaps"
+      confidence: medium
+      inference_basis: "Dense but legible workspace."
+  density_rules:
+    - "Keep active question spacious; keep rails denser."
+layout:
+  layout_principles:
+    - "Desktop uses three zones: evidence/trail, active question, context/export."
+    - "Mobile uses tabs: Question, Trail, Context, Export."
+    - "Central question remains dominant at every breakpoint."
+  alignment:
+    - "Use strict top alignment for rails and question panel."
+    - "Align rail metadata on a compact grid."
+  information_hierarchy:
+    - "Question first, recommendation second, rationale third, controls fourth."
+  content_grouping:
+    - "Group research, decisions, glossary, and exports into separate side-rail modules."
+  negative_space:
+    - "Use breathing room around the active prompt; use controlled density elsewhere."
+grid_system:
+  columns:
+    desktop:
+      value: "minmax(260px, 0.9fr) minmax(420px, 1.45fr) minmax(260px, 0.9fr)"
+      usage: "three-zone questionnaire shell"
+      confidence: medium
+      inference_basis: "Agreed desktop composition."
+    mobile:
+      value: "1fr"
+      usage: "tabbed single column"
+      confidence: high
+      inference_basis: "Mobile usability requirement."
+  gutters:
+    desktop:
+      value: "18px"
+      usage: "zone separation"
+      confidence: medium
+      inference_basis: "Dense dossier layout."
+  margins:
+    app:
+      value: "clamp(14px, 2.5vw, 32px)"
+      usage: "viewport edge margin"
+      confidence: medium
+      inference_basis: "Responsive artifact framing."
+  breakpoints:
+    mobile:
+      value: "0px to 859px"
+      usage: "tabbed layout"
+      confidence: high
+      inference_basis: "Touch-first layout."
+    desktop:
+      value: "860px and up"
+      usage: "three-zone layout"
+      confidence: high
+      inference_basis: "Desktop composition."
+  composition_grid:
+    - "Central panel uses vertical rhythm; rails use cardless modules with thin dividers."
+sizing:
+  component_sizes:
+    touch_target:
+      value: "44px minimum"
+      usage: "buttons, tabs, option rows"
+      confidence: high
+      inference_basis: "Touch accessibility."
+    central_panel_min:
+      value: "420px"
+      usage: "desktop question panel"
+      confidence: medium
+      inference_basis: "Question requires long text and controls."
+  icon_sizes:
+    status_dot:
+      value: "8px"
+      usage: "state marks"
+      confidence: medium
+      inference_basis: "Small brass object highlights."
+  media_sizes:
+    file_preview:
+      value: "96px thumbnail-equivalent metadata block"
+      usage: "file inventory without external preview dependence"
+      confidence: low
+      inference_basis: "File metadata needs compact display."
+  touch_targets:
+    default:
+      value: "44px by 44px"
+      usage: "interactive minimum"
+      confidence: high
+      inference_basis: "Mobile and accessibility requirement."
+  responsive_scaling:
+    - "Do not scale font size with viewport width."
+    - "Allow panel widths and tab visibility to adapt by breakpoint."
+borders:
+  widths:
+    hairline:
+      value: "1px"
+      usage: "panel edges and dividers"
+      confidence: high
+      inference_basis: "Fine frame and trim details."
+    focus:
+      value: "2px"
+      usage: "keyboard focus"
+      confidence: high
+      inference_basis: "Accessibility."
+  styles:
+    default:
+      value: "solid"
+      usage: "all UI dividers"
+      confidence: high
+      inference_basis: "Stable product UI."
+  usage_rules:
+    - "Use full perimeter borders or dividers, not decorative side stripes."
+    - "Tint borders toward brass, olive, or ivory depending on surface."
+  contrast_behavior:
+    - "Increase border contrast on focus and active states."
+radii:
+  scale:
+    sm:
+      value: "8px"
+      usage: "small controls"
+      confidence: high
+      inference_basis: "Practical controls."
+    md:
+      value: "14px"
+      usage: "inputs and option rows"
+      confidence: high
+      inference_basis: "Softened product surfaces."
+    lg:
+      value: "20px"
+      usage: "major panel shells"
+      confidence: medium
+      inference_basis: "Layered material slabs."
+  usage_rules:
+    - "Keep major panels subtly rounded, not bubbly."
+    - "Use concentric radii for nested shells."
+  shape_personality: "machined, worn, and restrained"
+shadows:
+  elevation_scale:
+    panel:
+      value: "0 18px 60px rgba(0, 0, 0, 0.42)"
+      usage: "major shells"
+      confidence: medium
+      inference_basis: "Deep shadow from cinematic interiors."
+    inset:
+      value: "inset 0 1px 0 rgba(244, 233, 200, 0.13)"
+      usage: "lacquer highlight"
+      confidence: medium
+      inference_basis: "Car paint and metal highlights."
+  ambient_shadows:
+    value: "soft black-green ambient shadow"
+    usage: "background depth"
+    confidence: medium
+    inference_basis: "Green-black shadow cast across references."
+  directional_shadows:
+    value: "warm upper-left highlight with lower-right falloff"
+    usage: "panel lighting"
+    confidence: medium
+    inference_basis: "Interior light and fire sources."
+  usage_rules:
+    - "Use shadows for material depth, not floating card decoration."
+gradients:
+  linear:
+    lacquer_panel:
+      value: "linear-gradient(145deg, rgba(15,48,40,0.96), rgba(6,18,13,0.98))"
+      usage: "panel core"
+      confidence: high
+      inference_basis: "Reflective green-black car surfaces."
+  radial:
+    brass_glow:
+      value: "radial-gradient(circle at 20% 0%, rgba(224,122,36,0.18), transparent 36rem)"
+      usage: "ambient firelight"
+      confidence: medium
+      inference_basis: "Fire and lamp glow."
+  atmospheric:
+    smoke_vignette:
+      value: "radial-gradient(circle at 80% 20%, rgba(75,86,51,0.18), transparent 28rem)"
+      usage: "background atmosphere"
+      confidence: medium
+      inference_basis: "Smoke and olive shadows."
+  usage_rules:
+    - "Do not use gradient text."
+    - "Keep gradients behind content or inside material surfaces."
+materials:
+  material_palette:
+    - "dark lacquer"
+    - "oxidized brass"
+    - "aged parchment"
+    - "smoked olive glass"
+    - "worn leather"
+  physical_properties:
+    - "reflective highlights"
+    - "fine scratches"
+    - "warm tarnish"
+    - "grain and patina"
+  ui_materials:
+    - "lacquer panel shell"
+    - "brass action rail"
+    - "parchment export surface"
+  confidence: high
+  inference_basis: "Directly visible car paint, metal, walls, smoke, flowers, and damaged objects."
+textures:
+  texture_types:
+    - "film grain"
+    - "oxidation speckle"
+    - "scratched lacquer"
+    - "aged paper fiber"
+  grain: "fine CSS radial noise overlay, opacity below 0.12"
+  surface_noise: "layered repeating gradients, never image-based"
+  pattern_language:
+    - "thin scratches"
+    - "dust speckles"
+    - "subtle brass mottling"
+lighting:
+  lighting_direction: "warm upper-left and center-right practical glow, deep green-black falloff"
+  quality: "cinematic hard highlights with soft atmospheric haze"
+  contrast: "high contrast with warm highlights and dense shadows"
+  color_temperature: "warm amber highlights against cool olive-black shadows"
+  practical_lights:
+    - "lamp glow"
+    - "fire glow"
+    - "window reflection"
+  mood_effect: "tense, intimate, and consequential"
+motion:
+  motion_principles:
+    - "Motion confirms state changes and panel reveals."
+    - "Avoid ornamental choreography that slows decision work."
+  durations:
+    fast:
+      value: "160ms"
+      usage: "button feedback"
+      confidence: medium
+      inference_basis: "Product UI responsiveness."
+    normal:
+      value: "240ms"
+      usage: "tab and panel changes"
+      confidence: medium
+      inference_basis: "Stateful questionnaire flow."
+  easing:
+    default:
+      value: "cubic-bezier(0.22, 1, 0.36, 1)"
+      usage: "ease-out-quart feel"
+      confidence: medium
+      inference_basis: "Natural deceleration without bounce."
+  choreography:
+    - "Active question changes with a short fade and translate."
+    - "Validation feedback appears inline."
+  interaction_motion:
+    button:
+      value: "translateY(-1px) on hover, scale(0.99) on active"
+      usage: "tactile press"
+      confidence: low
+      inference_basis: "Material UI interpretation."
+  camera_motion:
+    value: "not_applicable"
+    usage: "static interface"
+    confidence: high
+    inference_basis: "No camera in HTML UI."
+animation:
+  entrance:
+    value: "opacity and translateY only"
+    usage: "initial shell reveal"
+    confidence: medium
+    inference_basis: "Polished but fast product arrival."
+  exit:
+    value: "opacity only"
+    usage: "tab changes"
+    confidence: medium
+    inference_basis: "Avoid layout jank."
+  loading:
+    value: "inline skeleton bars with brass shimmer"
+    usage: "future async states"
+    confidence: low
+    inference_basis: "State variant support."
+  feedback:
+    value: "small status pulse on validation"
+    usage: "state change"
+    confidence: low
+    inference_basis: "Product feedback."
+  state_change:
+    value: "short fade-through"
+    usage: "question navigation"
+    confidence: medium
+    inference_basis: "Readable transitions."
+  reduced_motion:
+    value: "disable transforms and keep opacity changes minimal"
+    usage: "prefers-reduced-motion"
+    confidence: high
+    inference_basis: "Accessibility."
+camera:
+  framing:
+    - "close, immersive crop"
+    - "dominant focal object"
+  focal_length_tendencies:
+    - "medium to close perspective"
+  depth_of_field: "shallow in portrait, deeper in object scenes"
+  camera_movement:
+    - "static implied"
+  stabilization: "still editorial frame"
+  aspect_ratio: "square source references, responsive UI output"
+composition:
+  framing_rules:
+    - "Let one panel dominate the frame."
+    - "Use rails as contextual framing devices."
+  focal_points:
+    - "active question"
+    - "recommended answer"
+    - "decision trail"
+  balance: "weighted center with compressed evidence rails"
+  rhythm: "archive scan, then decisive action"
+  cropping:
+    - "avoid content cutoffs"
+    - "preserve labels and actions within panel boundaries"
+  scale_relationships:
+    - "question headline much larger than rail text"
+    - "controls larger than metadata"
+environment:
+  environment_type: "opulent damaged interior and overgrown automotive exterior"
+  architecture:
+    - "wood paneling"
+    - "framed art"
+    - "warm plaster"
+    - "dense ornament"
+  geography: []
+  climate:
+    - "humid"
+    - "smoky"
+    - "muddy"
+  socioeconomic_tone: "decayed luxury"
+  environmental_storytelling:
+    - "wealth, wear, chaos, and ritual coexist."
+setting:
+  era: "contemporary objects inside old-world interior language"
+  time_of_day: "warm artificial light and daylight reflections"
+  cultural_context: []
+  technological_sophistication: "analog luxury plus damaged machinery"
+  narrative_function: "visual tension and consequence"
+wardrobe:
+  applicability: "applicable"
+  palette:
+    - "black"
+    - "bronze"
+    - "warm skin tones"
+  silhouette:
+    - "dark structured clothing"
+    - "large metallic bow-like shape"
+  materials:
+    - "glossy leather-like black"
+    - "metallic foil"
+  styling_rules:
+    - "translate to glossy-dark UI shells and brass highlights, not literal fashion motifs"
+  confidence: medium
+  inference_basis: "Single portrait reference."
+props:
+  prop_categories:
+    - "cars"
+    - "frames"
+    - "chandelier"
+    - "metal spheres"
+    - "flowers"
+    - "bowl"
+    - "damaged electronics"
+  material_rules:
+    - "aged metal, lacquer, glass, paper, wood, water, smoke"
+  narrative_roles:
+    - "evidence of status"
+    - "evidence of entropy"
+    - "evidence of ritual"
+  scale_rules:
+    - "large focal object with smaller contextual debris"
+iconography:
+  style: "thin, label-like, geometric marks only when necessary"
+  stroke_width: "1.25px to 1.5px"
+  corner_style: "slightly softened"
+  filled_vs_outline: "mostly outline, filled only for status dots"
+  metaphor_rules:
+    - "Prefer simple marks for state, export, upload, research, and ADR."
+    - "Avoid decorative object metaphors."
+  accessibility_rules:
+    - "Every icon button needs visible text or aria-label."
+illustration_style:
+  applicability: "not_applicable"
+  rendering_approach: "No illustration is required for the questionnaire UI."
+  linework: "not_applicable"
+  color_behavior: "not_applicable"
+  detail_level: "not_applicable"
+  confidence: high
+  inference_basis: "The UI should translate photographic materials into CSS surfaces, not illustrations."
+photography_style:
+  applicability: "applicable"
+  subject_treatment: "close, tactile, materially dense, dramatic"
+  lens_behavior: "close focal framing with strong highlights"
+  color_grading: "amber highlights, green-black shadows, muted cream midtones"
+  composition:
+    - "dominant object or face"
+    - "dense environmental clues"
+  retouching: "cinematic but gritty, with visible texture and patina"
+cinematic_style:
+  genre_cues:
+    - "decayed luxury"
+    - "ritual tension"
+    - "controlled chaos"
+  shot_language:
+    - "close-up"
+    - "object study"
+    - "environmental tableau"
+  editorial_rhythm: "slow inspection with sharp focal moments"
+  aspect_ratio: "source square; UI adapts to viewport"
+  grading:
+    - "warm amber"
+    - "olive shadow"
+    - "deep lacquer"
+rendering_style:
+  medium: "self-contained web UI"
+  realism_level: "materially suggestive, not literal skeuomorphism"
+  surface_modeling:
+    - "CSS gradients"
+    - "inset highlights"
+    - "grain overlay"
+    - "thin borders"
+  atmosphere:
+    - "smoky warmth"
+    - "low-lit focus"
+  post_processing:
+    - "subtle vignette"
+    - "noise"
+surface_treatment:
+  finish:
+    - "gloss lacquer"
+    - "burnished metal"
+    - "matte parchment"
+  reflectivity: "selective highlights on panels and controls"
+  translucency: "none for content panels; avoid glass blur"
+  wear: "subtle speckle and scratched edges"
+  depth_treatment:
+    - "outer shell and inner core"
+    - "inset highlights"
+    - "ambient shadow"
+accessibility:
+  contrast_targets:
+    - "Primary text at WCAG AA or stronger."
+    - "Focus outlines must be visible on dark and light surfaces."
+  type_legibility:
+    - "Body text no smaller than 15px."
+    - "Use wrap and overflow handling for long answers."
+  motion_safety:
+    - "Respect prefers-reduced-motion."
+    - "Animate transform and opacity only."
+  color_independence:
+    - "Pair color states with labels and text."
+  touch_targets:
+    - "Interactive controls at least 44px tall on touch viewports."
+  alt_text_guidance:
+    - "Uploaded file previews need filename, type, and notes because the template cannot inspect model context."
+interaction_design:
+  interaction_principles:
+    - "Agent-guided first, self-serve capable."
+    - "State import/export must be visible and recoverable."
+    - "Back/forward navigation should never erase answers."
+  affordances:
+    - "Option rows are large, bordered, and selected with brass highlight."
+    - "Tabs are explicit on mobile."
+    - "Export buttons are grouped together."
+  feedback_rules:
+    - "Show validation messages inline."
+    - "Reflect selected answer immediately in local draft."
+  input_methods:
+    - "keyboard"
+    - "pointer"
+    - "touch"
+    - "file picker metadata"
+  error_behavior:
+    - "Invalid JSON import shows error without clearing existing state."
+    - "Unsupported answer type displays raw JSON fallback."
+ui_patterns:
+  navigation:
+    - "desktop side rails"
+    - "mobile tabs"
+    - "question back and next controls"
+  controls:
+    - "freeform textarea"
+    - "single choice radio-like rows"
+    - "multi choice checkbox-like rows"
+    - "ranked choice ordered list"
+    - "scale slider"
+    - "yes/no segmented control"
+    - "file metadata picker"
+    - "matrix inputs"
+    - "branching rule preview"
+  cards_or_panels:
+    - "major panels use layered shells; no nested decorative card stacks"
+  forms:
+    - "one active answer input at a time"
+  overlays:
+    - "none required"
+  data_display:
+    - "decision trail"
+    - "research list"
+    - "glossary list"
+  empty_states:
+    - "show starter question and empty rail hints"
+sound_design:
+  applicability: "not_applicable"
+  sonic_palette:
+    - "No bundled sound. The interface is silent."
+  feedback_sounds:
+    - "not_applicable"
+  ambient_sound: "not_applicable"
+  rhythm: "not_applicable"
+  confidence: high
+  inference_basis: "Self-contained questionnaire UI should not play sound."
+narrative_tone:
+  tone_words:
+    - "firm"
+    - "precise"
+    - "archival"
+    - "consequential"
+  pacing: "one decisive question at a time"
+  point_of_view: "agent-guided interview with visible recommendation"
+  stakes: "decisions become project artifacts"
+  emotional_arc:
+    - "ambiguity"
+    - "pressure"
+    - "specificity"
+    - "documented decision"
+emotional_palette:
+  primary_emotions:
+    - "focus"
+    - "tension"
+    - "confidence"
+  secondary_emotions:
+    - "curiosity"
+    - "urgency"
+    - "craft"
+  tension_release:
+    - "answer captured"
+    - "decision logged"
+    - "ADR written"
+  sensory_associations:
+    - "warm metal"
+    - "dark polish"
+    - "aged paper"
+worldbuilding:
+  world_rules:
+    - "The product world is an archive of decisions under pressure."
+    - "Every answer leaves a trace."
+    - "Every hard decision can become an ADR."
+  cultural_influences:
+    - "editorial archive"
+    - "luxury object study"
+    - "technical dossier"
+  economy_and_status:
+    - "premium through restraint and material specificity"
+  technology_rules:
+    - "No server required."
+    - "State is local JSON."
+    - "Artifacts are written by the agent."
+  environmental_logic:
+    - "Dark workspace, warm evidence, precise controls."
+styling_rules:
+  always:
+    - "Keep active question visually dominant."
+    - "Use CSS-only texture."
+    - "Keep interactive states explicit."
+  prefer:
+    - "Warm ivory text."
+    - "Brass action accents."
+    - "Olive-black shadows."
+  avoid:
+    - "Purple-blue AI gradients."
+    - "Beige monochrome luxury."
+    - "Decorative glassmorphism."
+    - "Literal car or fire motifs."
+  conditional:
+    - "Use fire_amber only for warning, urgent, or active-pressure states."
+dos_and_donts:
+  dos:
+    - "Use semantic HTML and labels."
+    - "Keep file import/export obvious."
+    - "Preserve local draft recovery."
+  donts:
+    - "Do not depend on a server."
+    - "Do not fetch external fonts or assets."
+    - "Do not hide filesystem limitations."
+  edge_cases:
+    - "Very long answers wrap inside the central panel."
+    - "Invalid JSON import shows a recoverable error."
+    - "Mobile rails collapse into tabs."
+token_dependencies:
+  color_to_typography:
+    - "Warm ivory text and Georgia headings carry the editorial tone."
+  spacing_to_layout:
+    - "Central question uses large padding while rails use compact spacing."
+  motion_to_interaction:
+    - "Short ease-out motion supports state changes only."
+  material_to_lighting:
+    - "Lacquer gradients and inset highlights create depth."
+  brand_to_components:
+    - "Brass accents identify primary actions, active tabs, and selected answers."
+dynamic_tokens:
+  modes:
+    dark:
+      value: "default"
+      usage: "primary UI mode"
+      confidence: high
+      inference_basis: "Reference visuals are shadow-rich and lacquer-dark."
+  emotional_states:
+    neutral:
+      value: "oxidized_brass"
+      usage: "normal actions"
+      confidence: medium
+      inference_basis: "Metallic warmth."
+    pressure:
+      value: "fire_amber"
+      usage: "research needed, validation error, hard decision"
+      confidence: medium
+      inference_basis: "Fire and tension imagery."
+  cinematic_intensity:
+    low:
+      value: "reduced grain and no ambient glow"
+      usage: "mobile or reduced visual load"
+      confidence: medium
+      inference_basis: "Performance and readability."
+  seasonal_variants:
+    applicability: "not_applicable"
+    confidence: high
+    inference_basis: "No seasonal variants are required."
+  interaction_states:
+    selected:
+      value: "brass border and warm inset"
+      usage: "selected option"
+      confidence: high
+      inference_basis: "Metal highlight language."
+responsive_rules:
+  mobile:
+    layout: "single column with tabs"
+    typography: "30px prompt, 16px body, 12px metadata"
+    interaction: "44px touch targets and no hover-only controls"
+  tablet:
+    layout: "two-column or tabbed layout depending on width"
+    typography: "same fixed scale as desktop where space permits"
+    interaction: "touch and keyboard friendly"
+  desktop:
+    layout: "three-zone grid"
+    typography: "40px prompt, 16px body"
+    interaction: "keyboard, pointer, import/export controls visible"
+  wide:
+    layout: "constrain max width and keep central panel dominant"
+    typography: "do not fluid-scale beyond desktop values"
+    interaction: "avoid stretched rail lines"
+  density_adjustments:
+    - "Hide side rails behind tabs below 860px."
+    - "Compress rail metadata before reducing question readability."
+state_variants:
+  default:
+    panel: "lacquer gradient, ivory text"
+    confidence: high
+    inference_basis: "Primary material translation."
+  hover:
+    panel: "slightly brighter brass border"
+    confidence: medium
+    inference_basis: "Tactile highlight."
+  active:
+    panel: "pressed transform and darker wood tone"
+    confidence: medium
+    inference_basis: "Physical material pressure."
+  focus:
+    panel: "porcelain outline"
+    confidence: high
+    inference_basis: "Accessible focus contrast."
+  disabled:
+    panel: "low-contrast smoked olive"
+    confidence: medium
+    inference_basis: "Muted shadow tones."
+  loading:
+    panel: "subtle skeleton with brass shimmer"
+    confidence: low
+    inference_basis: "Future async support."
+  error:
+    panel: "rust red label plus text explanation"
+    confidence: medium
+    inference_basis: "Fire and rust tones."
+  success:
+    panel: "olive success mark plus text explanation"
+    confidence: medium
+    inference_basis: "Foliage tone."
+platform_adaptations:
+  web:
+    delivery: "single file HTML with inline CSS and JavaScript"
+    confidence: high
+    inference_basis: "User requirement."
+  ios:
+    guidance: "Use tabbed mobile mental model and 44px targets if translated to native."
+    confidence: medium
+    inference_basis: "Mobile adaptation requirement."
+  android:
+    guidance: "Use the same tab hierarchy with platform-native file picker semantics if translated."
+    confidence: low
+    inference_basis: "No Android-specific source visible."
+  print:
+    guidance: "Transcript and ADRs print as plain Markdown artifacts."
+    confidence: medium
+    inference_basis: "Artifact workflow."
+  ai_generation:
+    guidance: "Use dark lacquer, oxidized brass, warm ivory, olive shadow, and dense cinematic dossier language."
+    confidence: high
+    inference_basis: "Reference-derived visual world."
+ai_generation_prompts:
+  image_prompt: "A dark lacquer decision dossier UI with oxidized brass controls, warm ivory text, olive shadows, fine grain, and a dominant active-question panel, no external imagery."
+  negative_prompt: "No purple gradients, no generic survey builder, no floating blobs, no stock imagery, no decorative cars, no literal flames."
+  style_prompt: "High-friction editorial luxury, tactile archive, dark polished metal, aged parchment, rigorous product interface."
+  motion_prompt: "Short stateful fades, tactile button press, no decorative page choreography."
+  ui_prompt: "Three-zone desktop questionnaire with mobile tabs for Question, Trail, Context, and Export."
+  consistency_rules:
+    - "Use brass only for action and active emphasis."
+    - "Keep question panel dominant."
+implementation_notes:
+  tokenization_notes:
+    - "Expose major colors as CSS variables."
+    - "Keep surface and semantic tokens separate."
+  css_variable_guidance:
+    - "--lacquer, --petrol, --brass, --ivory, --parchment, --olive, --amber"
+  design_tool_guidance:
+    - "Use layered shells, hairlines, and warm focus states."
+  engineering_constraints:
+    - "No external assets."
+    - "No server."
+    - "No filesystem writes from browser."
+    - "State import/export through JSON."
+  validation_steps:
+    - "Validate YAML with the visual design system validator."
+    - "Open the HTML under file URL."
+    - "Test import/export and all supported answer types."

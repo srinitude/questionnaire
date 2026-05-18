@@ -1,0 +1,90 @@
+{
+  "skill_name": "questionnaire",
+  "evals": [
+    {
+      "id": "trigger-plan-interview",
+      "prompt": "interview me through this plan until the decisions are solid",
+      "expected_output": "The skill starts a questionnaire run, creates run-scoped artifacts, and asks one firm question with a recommended answer.",
+      "should_trigger": true,
+      "assertions": [
+        "Uses the questionnaire initializer or explains the run directory creation flow.",
+        "Asks one question at a time.",
+        "Includes a recommended answer and why the question matters."
+      ]
+    },
+    {
+      "id": "trigger-decision-questionnaire",
+      "prompt": "make a decision questionnaire for configuring this skill",
+      "expected_output": "The skill creates or updates a questionnaire state and frontend artifact for a guided setup.",
+      "should_trigger": true,
+      "assertions": [
+        "Mentions state.json as the source of truth.",
+        "Uses a browser-ready questionnaire artifact.",
+        "Tracks decisions and follow-up questions."
+      ]
+    },
+    {
+      "id": "trigger-guided-setup",
+      "prompt": "run a guided setup for my deployment choices",
+      "expected_output": "The skill runs an agent-guided setup questionnaire and uses web research when deployment claims or platform rules matter.",
+      "should_trigger": true,
+      "assertions": [
+        "Creates a run-scoped .questionnaire directory.",
+        "Uses web search only when external facts or constraints are introduced.",
+        "Validates state after updates."
+      ]
+    },
+    {
+      "id": "trigger-docs-aware-interview",
+      "prompt": "interview me with docs before I choose the API architecture",
+      "expected_output": "The skill interrogates the architecture decision, checks project docs/code when available, and writes an ADR only if the decision is hard to reverse.",
+      "should_trigger": true,
+      "assertions": [
+        "Inspects docs or asks for them before accepting fuzzy terms.",
+        "Uses glossary and ADR artifacts appropriately.",
+        "Does not ask multiple unrelated questions at once."
+      ]
+    },
+    {
+      "id": "trigger-vague-structured-intake",
+      "prompt": "turn this vague app idea into a structured intake and keep asking until it's clear",
+      "expected_output": "The skill starts a structured intake questionnaire, records answers, and dynamically creates better follow-ups.",
+      "should_trigger": true,
+      "assertions": [
+        "Uses one active question with answer type metadata.",
+        "Updates transcript and state artifacts.",
+        "Uses research-thinking lenses when the answer is vague or strategic."
+      ]
+    },
+    {
+      "id": "no-trigger-typeform-recommendation",
+      "prompt": "what are the best Typeform alternatives in 2026?",
+      "expected_output": "The skill should not trigger; this is a product recommendation and current web research task rather than a local questionnaire run.",
+      "should_trigger": false,
+      "assertions": [
+        "Does not create .questionnaire artifacts.",
+        "Does not run the initializer."
+      ]
+    },
+    {
+      "id": "no-trigger-backend-form-processing",
+      "prompt": "build the backend endpoint that accepts form submissions and stores them in Postgres",
+      "expected_output": "The skill should not trigger; this is backend implementation work, not a guided decision questionnaire.",
+      "should_trigger": false,
+      "assertions": [
+        "Does not use the questionnaire frontend template.",
+        "Does not create a questionnaire run."
+      ]
+    },
+    {
+      "id": "no-trigger-ordinary-survey-copy",
+      "prompt": "write ten survey questions for customer satisfaction",
+      "expected_output": "The skill should not trigger unless the user asks for a guided project-local questionnaire run.",
+      "should_trigger": false,
+      "assertions": [
+        "Does not create state.json.",
+        "Does not create ADRs or run-scoped artifacts."
+      ]
+    }
+  ]
+}

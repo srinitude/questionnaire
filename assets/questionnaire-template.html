@@ -1,0 +1,1272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Questionnaire Run</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --lacquer: #06120d;
+      --lacquer-2: #0a1b14;
+      --petrol: #0f3028;
+      --brass: #9b6a32;
+      --brass-2: #c08a43;
+      --ivory: #e9d8af;
+      --porcelain: #f4e9c8;
+      --parchment: #b99d67;
+      --olive: #4b5633;
+      --amber: #e07a24;
+      --rust: #b5482b;
+      --ink: #030806;
+      --line: rgba(233, 216, 175, 0.16);
+      --line-strong: rgba(244, 233, 200, 0.34);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.48);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --font-body: Aptos, "Segoe UI", system-ui, sans-serif;
+      --font-display: Georgia, "Times New Roman", serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(224, 122, 36, 0.20), transparent 34rem),
+        radial-gradient(circle at 84% 16%, rgba(75, 86, 51, 0.22), transparent 30rem),
+        linear-gradient(140deg, #030806 0%, var(--lacquer) 46%, #10251d 100%);
+      color: var(--ivory);
+      font: 16px/1.55 var(--font-body);
+      letter-spacing: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        radial-gradient(circle at 30% 40%, rgba(244, 233, 200, 0.12) 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 60%, rgba(155, 106, 50, 0.13) 0 1px, transparent 1px),
+        linear-gradient(115deg, transparent 0 48%, rgba(244, 233, 200, 0.04) 49%, transparent 52%);
+      background-size: 18px 18px, 27px 27px, 160px 160px;
+      mix-blend-mode: screen;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 0 45%, rgba(0, 0, 0, 0.42) 100%);
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.48;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--porcelain);
+      outline-offset: 3px;
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      width: min(1540px, calc(100vw - 28px));
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 22px 0 28px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 58px;
+      margin-bottom: 18px;
+      padding: 10px 12px 10px 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(6, 18, 13, 0.88), rgba(15, 48, 40, 0.74));
+      box-shadow: inset 0 1px 0 rgba(244, 233, 200, 0.12);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .seal {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(244, 233, 200, 0.28);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 38% 28%, rgba(244, 233, 200, 0.52), transparent 20%),
+        linear-gradient(145deg, var(--brass), #4d2a13);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20), 0 8px 20px rgba(0, 0, 0, 0.35);
+      flex: 0 0 auto;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.1;
+      overflow-wrap: anywhere;
+    }
+
+    .brand p {
+      margin: 2px 0 0;
+      color: var(--parchment);
+      font-size: 12px;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .statusline {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      min-width: 0;
+      color: var(--parchment);
+      font-size: 12px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brass-2);
+      box-shadow: 0 0 18px rgba(224, 122, 36, 0.5);
+      flex: 0 0 auto;
+    }
+
+    .mobile-tabs {
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tab-button {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(6, 18, 13, 0.76);
+      color: var(--parchment);
+      transition: transform 180ms var(--ease), border-color 180ms var(--ease), color 180ms var(--ease);
+    }
+
+    .tab-button[aria-selected="true"] {
+      border-color: rgba(192, 138, 67, 0.82);
+      color: var(--porcelain);
+      background: rgba(155, 106, 50, 0.18);
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.9fr) minmax(420px, 1.45fr) minmax(260px, 0.9fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .zone {
+      min-width: 0;
+    }
+
+    .panel {
+      border: 1px solid rgba(233, 216, 175, 0.13);
+      border-radius: 22px;
+      padding: 6px;
+      background: linear-gradient(145deg, rgba(244, 233, 200, 0.06), rgba(155, 106, 50, 0.05));
+      box-shadow: var(--shadow);
+    }
+
+    .panel-core {
+      border: 1px solid rgba(233, 216, 175, 0.13);
+      border-radius: 17px;
+      background:
+        linear-gradient(145deg, rgba(15, 48, 40, 0.94), rgba(6, 18, 13, 0.98)),
+        var(--lacquer);
+      box-shadow: inset 0 1px 0 rgba(244, 233, 200, 0.12);
+      overflow: hidden;
+    }
+
+    .rail .panel-core {
+      padding: 18px;
+    }
+
+    .question-panel .panel-core {
+      padding: clamp(20px, 3vw, 38px);
+    }
+
+    .section + .section {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 12px;
+      color: var(--brass-2);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .rail h2,
+    .export-card h2 {
+      margin: 0 0 12px;
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--porcelain);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .question-title {
+      margin: 0;
+      max-width: 15ch;
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 500;
+      line-height: 1.08;
+      color: var(--porcelain);
+      overflow-wrap: anywhere;
+    }
+
+    .question-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0 0;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--parchment);
+      background: rgba(3, 8, 6, 0.24);
+      font-size: 12px;
+      line-height: 1.2;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .recommendation {
+      margin: 26px 0;
+      padding: 18px;
+      border: 1px solid rgba(192, 138, 67, 0.40);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 0 0, rgba(224, 122, 36, 0.13), transparent 22rem),
+        rgba(3, 8, 6, 0.30);
+    }
+
+    .recommendation strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brass-2);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    .recommendation p,
+    .why p {
+      margin: 0;
+      color: var(--ivory);
+      overflow-wrap: anywhere;
+    }
+
+    .why {
+      margin-bottom: 24px;
+      color: var(--parchment);
+    }
+
+    .answer-area {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field,
+    textarea,
+    select,
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(3, 8, 6, 0.45);
+      color: var(--ivory);
+      box-shadow: inset 0 1px 0 rgba(244, 233, 200, 0.08);
+    }
+
+    textarea {
+      min-height: 138px;
+      padding: 14px;
+      resize: vertical;
+    }
+
+    select,
+    input[type="text"],
+    input[type="number"] {
+      min-height: 44px;
+      padding: 9px 12px;
+    }
+
+    .option-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      min-height: 48px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(3, 8, 6, 0.32);
+      color: var(--ivory);
+      transition: transform 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease);
+    }
+
+    .option-row:hover {
+      transform: translateY(-1px);
+      border-color: rgba(192, 138, 67, 0.52);
+    }
+
+    .option-row input {
+      margin-top: 4px;
+      accent-color: var(--brass-2);
+    }
+
+    .option-row.selected {
+      border-color: rgba(192, 138, 67, 0.88);
+      background: rgba(155, 106, 50, 0.20);
+    }
+
+    .option-label {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .custom-field {
+      margin-top: 4px;
+    }
+
+    .scale-wrap {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(3, 8, 6, 0.30);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--brass-2);
+    }
+
+    .matrix-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 520px;
+    }
+
+    th, td {
+      border-bottom: 1px solid rgba(233, 216, 175, 0.10);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--parchment);
+      font-size: 12px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .button {
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 1px solid rgba(244, 233, 200, 0.18);
+      border-radius: 999px;
+      background: rgba(3, 8, 6, 0.36);
+      color: var(--ivory);
+      transition: transform 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(192, 138, 67, 0.58);
+    }
+
+    .button:active {
+      transform: scale(0.99);
+    }
+
+    .button.primary {
+      color: #100904;
+      border-color: rgba(244, 233, 200, 0.32);
+      background: linear-gradient(145deg, var(--brass-2), var(--brass));
+      font-weight: 750;
+    }
+
+    .button.warn {
+      border-color: rgba(224, 122, 36, 0.55);
+      color: var(--porcelain);
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(233, 216, 175, 0.10);
+      color: var(--ivory);
+      overflow-wrap: anywhere;
+    }
+
+    .list-item:last-child {
+      border-bottom: 0;
+    }
+
+    .list-item small {
+      display: block;
+      margin-top: 4px;
+      color: var(--parchment);
+      font-size: 12px;
+    }
+
+    .empty {
+      color: rgba(233, 216, 175, 0.62);
+      font-size: 14px;
+    }
+
+    .export-card {
+      display: grid;
+      gap: 12px;
+    }
+
+    .import-box {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(233, 216, 175, 0.12);
+      border-radius: 16px;
+      background: rgba(3, 8, 6, 0.28);
+    }
+
+    .message {
+      min-height: 20px;
+      color: var(--parchment);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .message.error {
+      color: #f0a083;
+    }
+
+    .message.success {
+      color: #c9d99b;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 859px) {
+      .app {
+        width: min(100vw - 20px, 760px);
+        padding: 12px 0 20px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .statusline {
+        justify-content: flex-start;
+      }
+
+      .mobile-tabs {
+        display: grid;
+      }
+
+      .shell {
+        display: block;
+      }
+
+      .zone {
+        display: none;
+      }
+
+      .zone.active-mobile {
+        display: block;
+      }
+
+      .question-title {
+        max-width: 100%;
+        font-size: 30px;
+      }
+
+      .rail .panel-core,
+      .question-panel .panel-core {
+        padding: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="seal" aria-hidden="true"></div>
+        <div>
+          <h1 id="projectName">Questionnaire</h1>
+          <p id="runMeta">Import state.json or continue with the embedded starter state.</p>
+        </div>
+      </div>
+      <div class="statusline" aria-live="polite">
+        <span class="dot" aria-hidden="true"></span>
+        <span id="statusText">Draft ready</span>
+      </div>
+    </header>
+
+    <nav class="mobile-tabs" aria-label="Questionnaire sections">
+      <button class="tab-button" data-tab="Question" aria-selected="true">Question</button>
+      <button class="tab-button" data-tab="Trail" aria-selected="false">Trail</button>
+      <button class="tab-button" data-tab="Context" aria-selected="false">Context</button>
+      <button class="tab-button" data-tab="Export" aria-selected="false">Export</button>
+    </nav>
+
+    <section class="shell">
+      <aside class="zone rail trail-zone" data-zone="Trail">
+        <div class="panel">
+          <div class="panel-core">
+            <section class="section">
+              <span class="eyebrow">Trail</span>
+              <h2>Decision Trail</h2>
+              <ul id="decisionList" class="list"></ul>
+            </section>
+            <section class="section">
+              <h2>Research Evidence</h2>
+              <ul id="researchList" class="list"></ul>
+            </section>
+            <section class="section">
+              <h2>Branch Rules</h2>
+              <ul id="branchList" class="list"></ul>
+            </section>
+          </div>
+        </div>
+      </aside>
+
+      <section class="zone question-zone active-mobile" data-zone="Question">
+        <div class="panel question-panel">
+          <div class="panel-core">
+            <span class="eyebrow" id="questionEyebrow">Active Question</span>
+            <h2 id="questionPrompt" class="question-title">Loading question</h2>
+            <div id="questionMeta" class="question-meta"></div>
+            <div class="recommendation">
+              <strong>Recommended answer</strong>
+              <p id="recommendedAnswer"></p>
+            </div>
+            <div class="why">
+              <span class="eyebrow">Why this matters</span>
+              <p id="whyItMatters"></p>
+            </div>
+            <form id="answerForm" class="answer-area"></form>
+            <div class="button-row">
+              <button class="button" id="prevButton" type="button">Previous</button>
+              <button class="button primary" id="saveButton" type="button">Save local draft</button>
+              <button class="button" id="nextButton" type="button">Next</button>
+            </div>
+            <p id="formMessage" class="message" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="zone rail context-zone" data-zone="Context">
+        <div class="panel">
+          <div class="panel-core">
+            <section class="section">
+              <span class="eyebrow">Context</span>
+              <h2>Glossary</h2>
+              <ul id="glossaryList" class="list"></ul>
+            </section>
+            <section class="section">
+              <h2>ADRs</h2>
+              <ul id="adrList" class="list"></ul>
+            </section>
+            <section class="section export-card" data-zone="Export">
+              <span class="eyebrow">Export</span>
+              <h2>State Controls</h2>
+              <div class="import-box">
+                <label for="importFile">Import state.json</label>
+                <input id="importFile" type="file" accept="application/json,.json">
+                <button class="button" id="importButton" type="button">Import selected JSON</button>
+              </div>
+              <button class="button primary" id="exportJsonButton" type="button">Export JSON</button>
+              <button class="button" id="exportTranscriptButton" type="button">Export Transcript</button>
+              <button class="button warn" id="clearDraftButton" type="button">Clear browser draft</button>
+              <p id="exportMessage" class="message" aria-live="polite"></p>
+            </section>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "questionnaire.localDraft.v1";
+
+    const starterState = {
+      run: {
+        id: "starter",
+        created_at: "starter",
+        run_dir: "",
+        index_html: "",
+        status: "active"
+      },
+      project: {
+        root: "",
+        name: "Questionnaire",
+        root_markers: []
+      },
+      current_question: "q-0001-opening",
+      questions: [
+        {
+          id: "q-0001-opening",
+          status: "active",
+          prompt: "What do you want to configure, decide, or stress-test in this questionnaire run?",
+          recommended_answer: "Replace this starter recommendation with a task-specific recommendation before presenting the run.",
+          why_it_matters: "The opening answer determines the decision branch, research needs, glossary terms, and artifacts to create first.",
+          answer_type: "freeform",
+          options: [],
+          custom_option_enabled: false,
+          user_answer: "",
+          research_required: false,
+          research_artifact: "",
+          follow_up_logic: [],
+          created_at: "starter"
+        }
+      ],
+      decisions: [],
+      glossary: [],
+      research: [],
+      adrs: [],
+      exports: {
+        transcript: "transcript.md",
+        context: "CONTEXT.md",
+        state: "state.json"
+      },
+      ui: {
+        active_tab: "Question",
+        layout: "agent_guided",
+        theme: "dark_lacquer_brass",
+        local_draft_enabled: true
+      }
+    };
+
+    let state = loadLocalDraft() || starterState;
+
+    const els = {
+      projectName: document.getElementById("projectName"),
+      runMeta: document.getElementById("runMeta"),
+      statusText: document.getElementById("statusText"),
+      questionEyebrow: document.getElementById("questionEyebrow"),
+      questionPrompt: document.getElementById("questionPrompt"),
+      questionMeta: document.getElementById("questionMeta"),
+      recommendedAnswer: document.getElementById("recommendedAnswer"),
+      whyItMatters: document.getElementById("whyItMatters"),
+      answerForm: document.getElementById("answerForm"),
+      formMessage: document.getElementById("formMessage"),
+      decisionList: document.getElementById("decisionList"),
+      researchList: document.getElementById("researchList"),
+      branchList: document.getElementById("branchList"),
+      glossaryList: document.getElementById("glossaryList"),
+      adrList: document.getElementById("adrList"),
+      importFile: document.getElementById("importFile"),
+      importButton: document.getElementById("importButton"),
+      exportJsonButton: document.getElementById("exportJsonButton"),
+      exportTranscriptButton: document.getElementById("exportTranscriptButton"),
+      clearDraftButton: document.getElementById("clearDraftButton"),
+      exportMessage: document.getElementById("exportMessage"),
+      prevButton: document.getElementById("prevButton"),
+      saveButton: document.getElementById("saveButton"),
+      nextButton: document.getElementById("nextButton")
+    };
+
+    function loadLocalDraft() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function saveLocalDraft() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      setMessage(els.formMessage, "Saved to browser local draft.", "success");
+      render();
+    }
+
+    function currentQuestion() {
+      return state.questions.find((question) => question.id === state.current_question) || state.questions[0];
+    }
+
+    function currentIndex() {
+      return Math.max(0, state.questions.findIndex((question) => question.id === currentQuestion().id));
+    }
+
+    function optionValue(option) {
+      if (typeof option === "string") return option;
+      return option.value || option.label || JSON.stringify(option);
+    }
+
+    function optionLabel(option) {
+      if (typeof option === "string") return option;
+      return option.label || option.value || JSON.stringify(option);
+    }
+
+    function setQuestionAnswer(value) {
+      const question = currentQuestion();
+      question.user_answer = value;
+      renderRailOnly();
+    }
+
+    function render() {
+      const question = currentQuestion();
+      state.current_question = question.id;
+      els.projectName.textContent = state.project?.name || "Questionnaire";
+      els.runMeta.textContent = `Run ${state.run?.id || "draft"} · ${state.project?.root || "no project root loaded"}`;
+      els.statusText.textContent = `${state.questions.length} question${state.questions.length === 1 ? "" : "s"} · ${question.status}`;
+      els.questionEyebrow.textContent = question.research_required ? "Research-Aware Question" : "Active Question";
+      els.questionPrompt.textContent = question.prompt || "Untitled question";
+      els.recommendedAnswer.textContent = question.recommended_answer || "No recommendation yet.";
+      els.whyItMatters.textContent = question.why_it_matters || "No rationale supplied.";
+      renderQuestionMeta(question);
+      renderAnswer(question);
+      renderRailOnly();
+      updateMobileZones();
+      els.prevButton.disabled = currentIndex() === 0;
+      els.nextButton.disabled = currentIndex() >= state.questions.length - 1 && !nextBranchTarget(question);
+    }
+
+    function renderQuestionMeta(question) {
+      const bits = [
+        question.id,
+        question.answer_type,
+        question.status,
+        question.research_required ? "research required" : "no research flag"
+      ];
+      els.questionMeta.innerHTML = bits.map((bit) => `<span class="chip">${escapeHtml(bit)}</span>`).join("");
+    }
+
+    function renderAnswer(question) {
+      els.answerForm.innerHTML = "";
+      const type = question.answer_type || "freeform";
+      if (type === "freeform") return renderFreeform(question);
+      if (type === "single_choice") return renderSingleChoice(question);
+      if (type === "multi_choice") return renderMultiChoice(question);
+      if (type === "ranked_choice") return renderRankedChoice(question);
+      if (type === "scale") return renderScale(question);
+      if (type === "yes_no") return renderYesNo(question);
+      if (type === "file_upload") return renderFileUpload(question);
+      if (type === "matrix") return renderMatrix(question);
+      if (type === "branching") return renderBranching(question);
+      renderRawFallback(question);
+    }
+
+    function renderFreeform(question) {
+      const label = document.createElement("label");
+      label.className = "visually-hidden";
+      label.htmlFor = "freeformAnswer";
+      label.textContent = "Answer";
+      const textarea = document.createElement("textarea");
+      textarea.id = "freeformAnswer";
+      textarea.placeholder = "Write the answer here, then have the agent update state.json.";
+      textarea.value = typeof question.user_answer === "string" ? question.user_answer : JSON.stringify(question.user_answer || "", null, 2);
+      textarea.addEventListener("input", () => setQuestionAnswer(textarea.value));
+      els.answerForm.append(label, textarea);
+    }
+
+    function renderSingleChoice(question) {
+      const selected = typeof question.user_answer === "string" ? question.user_answer : "";
+      question.options.forEach((option, index) => {
+        const value = optionValue(option);
+        const row = optionRow("radio", `single-${index}`, optionLabel(option), selected === value, () => setQuestionAnswer(value));
+        els.answerForm.append(row);
+      });
+      if (question.custom_option_enabled) renderCustomField(selected, (value) => setQuestionAnswer(value));
+    }
+
+    function renderMultiChoice(question) {
+      const selected = Array.isArray(question.user_answer) ? question.user_answer : [];
+      question.options.forEach((option, index) => {
+        const value = optionValue(option);
+        const row = optionRow("checkbox", `multi-${index}`, optionLabel(option), selected.includes(value), (checked) => {
+          const next = new Set(Array.isArray(question.user_answer) ? question.user_answer : []);
+          if (checked) next.add(value);
+          else next.delete(value);
+          setQuestionAnswer(Array.from(next));
+        });
+        els.answerForm.append(row);
+      });
+      if (question.custom_option_enabled) renderCustomField("", (value) => {
+        const next = new Set(Array.isArray(question.user_answer) ? question.user_answer : []);
+        if (value) next.add(value);
+        setQuestionAnswer(Array.from(next));
+      });
+    }
+
+    function renderRankedChoice(question) {
+      const ranked = Array.isArray(question.user_answer) && question.user_answer.length
+        ? question.user_answer
+        : question.options.map(optionValue);
+      const list = document.createElement("div");
+      list.className = "answer-area";
+      ranked.forEach((value, index) => {
+        const row = document.createElement("div");
+        row.className = "option-row selected";
+        row.innerHTML = `<strong>${index + 1}</strong><span class="option-label">${escapeHtml(value)}</span>`;
+        const up = button("Up", () => moveRank(index, -1));
+        const down = button("Down", () => moveRank(index, 1));
+        row.append(up, down);
+        list.append(row);
+      });
+      els.answerForm.append(list);
+
+      function moveRank(index, delta) {
+        const nextIndex = index + delta;
+        if (nextIndex < 0 || nextIndex >= ranked.length) return;
+        const next = ranked.slice();
+        [next[index], next[nextIndex]] = [next[nextIndex], next[index]];
+        setQuestionAnswer(next);
+        render();
+      }
+    }
+
+    function renderScale(question) {
+      const config = question.options.find((item) => typeof item === "object") || {};
+      const min = Number(config.min ?? 1);
+      const max = Number(config.max ?? 5);
+      const step = Number(config.step ?? 1);
+      const value = Number(question.user_answer || config.default || min);
+      const wrap = document.createElement("div");
+      wrap.className = "scale-wrap";
+      wrap.innerHTML = `<div><strong>${value}</strong><span class="chip">${min} to ${max}</span></div>`;
+      const input = document.createElement("input");
+      input.type = "range";
+      input.min = String(min);
+      input.max = String(max);
+      input.step = String(step);
+      input.value = String(value);
+      input.addEventListener("input", () => {
+        setQuestionAnswer(Number(input.value));
+        render();
+      });
+      wrap.append(input);
+      els.answerForm.append(wrap);
+    }
+
+    function renderYesNo(question) {
+      const selected = question.user_answer === true ? "yes" : question.user_answer === false ? "no" : "";
+      ["yes", "no"].forEach((value) => {
+        const row = optionRow("radio", `yesno-${value}`, value.toUpperCase(), selected === value, () => setQuestionAnswer(value === "yes"));
+        els.answerForm.append(row);
+      });
+    }
+
+    function renderFileUpload(question) {
+      const input = document.createElement("input");
+      input.type = "file";
+      input.multiple = true;
+      input.addEventListener("change", () => {
+        const files = Array.from(input.files || []).map((file) => ({
+          name: file.name,
+          type: file.type || "application/octet-stream",
+          size: file.size,
+          last_modified: file.lastModified
+        }));
+        const notes = document.getElementById("fileNotes")?.value || "";
+        setQuestionAnswer({ files, notes });
+      });
+      const notes = document.createElement("textarea");
+      notes.id = "fileNotes";
+      notes.placeholder = "Add notes or local paths the agent should use as model context.";
+      notes.value = question.user_answer?.notes || "";
+      notes.addEventListener("input", () => {
+        const current = question.user_answer && typeof question.user_answer === "object" ? question.user_answer : { files: [] };
+        setQuestionAnswer({ ...current, notes: notes.value });
+      });
+      const currentFiles = document.createElement("div");
+      currentFiles.className = "message";
+      const files = question.user_answer?.files || [];
+      currentFiles.textContent = files.length ? files.map((file) => `${file.name} (${file.type}, ${file.size} bytes)`).join("; ") : "No file metadata captured yet.";
+      els.answerForm.append(input, notes, currentFiles);
+    }
+
+    function renderMatrix(question) {
+      const config = question.options.find((item) => typeof item === "object") || {};
+      const rows = config.rows || ["Option A", "Option B"];
+      const columns = config.columns || ["Criterion 1", "Criterion 2"];
+      const answer = question.user_answer && typeof question.user_answer === "object" ? question.user_answer : {};
+      const wrap = document.createElement("div");
+      wrap.className = "matrix-wrap";
+      const table = document.createElement("table");
+      table.innerHTML = `<thead><tr><th>Item</th>${columns.map((column) => `<th>${escapeHtml(column)}</th>`).join("")}</tr></thead>`;
+      const tbody = document.createElement("tbody");
+      rows.forEach((row) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<th>${escapeHtml(row)}</th>`;
+        columns.forEach((column) => {
+          const td = document.createElement("td");
+          const input = document.createElement("input");
+          input.type = "text";
+          input.value = answer[row]?.[column] || "";
+          input.addEventListener("input", () => {
+            const next = { ...(question.user_answer || {}) };
+            next[row] = { ...(next[row] || {}), [column]: input.value };
+            setQuestionAnswer(next);
+          });
+          td.append(input);
+          tr.append(td);
+        });
+        tbody.append(tr);
+      });
+      table.append(tbody);
+      wrap.append(table);
+      els.answerForm.append(wrap);
+    }
+
+    function renderBranching(question) {
+      renderSingleChoice(question);
+      const note = document.createElement("p");
+      note.className = "message";
+      const target = nextBranchTarget(question);
+      note.textContent = target ? `Next route: ${target}` : "No matching branch route yet. The agent can create the next question.";
+      els.answerForm.append(note);
+    }
+
+    function renderRawFallback(question) {
+      const pre = document.createElement("textarea");
+      pre.value = JSON.stringify(question.user_answer || {}, null, 2);
+      pre.addEventListener("input", () => {
+        try {
+          setQuestionAnswer(JSON.parse(pre.value));
+        } catch {
+          setMessage(els.formMessage, "Raw JSON answer is not valid yet.", "error");
+        }
+      });
+      els.answerForm.append(pre);
+    }
+
+    function optionRow(type, id, label, checked, onChange) {
+      const row = document.createElement("label");
+      row.className = `option-row${checked ? " selected" : ""}`;
+      row.htmlFor = id;
+      const input = document.createElement("input");
+      input.type = type;
+      input.id = id;
+      input.checked = checked;
+      input.name = type === "radio" ? "single-answer" : id;
+      input.addEventListener("change", () => onChange(input.checked));
+      const span = document.createElement("span");
+      span.className = "option-label";
+      span.textContent = label;
+      row.append(input, span);
+      return row;
+    }
+
+    function renderCustomField(value, onCommit) {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.className = "custom-field";
+      input.placeholder = "Custom option";
+      input.value = "";
+      input.addEventListener("change", () => onCommit(input.value.trim()));
+      els.answerForm.append(input);
+    }
+
+    function button(label, onClick) {
+      const el = document.createElement("button");
+      el.className = "button";
+      el.type = "button";
+      el.textContent = label;
+      el.addEventListener("click", onClick);
+      return el;
+    }
+
+    function nextBranchTarget(question) {
+      const rules = Array.isArray(question.follow_up_logic) ? question.follow_up_logic : [];
+      const answer = question.user_answer;
+      const match = rules.find((rule) => {
+        if (!rule || !rule.next_question_id) return false;
+        if (rule.operator === "equals") return String(answer) === String(rule.value);
+        if (rule.operator === "includes" && Array.isArray(answer)) return answer.includes(rule.value);
+        if (rule.operator === "truthy") return Boolean(answer);
+        return false;
+      });
+      return match?.next_question_id || "";
+    }
+
+    function renderRailOnly() {
+      renderList(els.decisionList, state.decisions, "No decisions captured yet.", decisionLabel);
+      renderList(els.researchList, state.research, "No research notes linked yet.", researchLabel);
+      renderList(els.glossaryList, state.glossary, "No glossary terms captured yet.", glossaryLabel);
+      renderList(els.adrList, state.adrs, "No ADRs linked yet.", adrLabel);
+      renderBranchList();
+    }
+
+    function renderList(el, items, emptyText, labelFn) {
+      if (!Array.isArray(items) || !items.length) {
+        el.innerHTML = `<li class="empty">${escapeHtml(emptyText)}</li>`;
+        return;
+      }
+      el.innerHTML = items.map((item) => `<li class="list-item">${labelFn(item)}</li>`).join("");
+    }
+
+    function decisionLabel(item) {
+      if (typeof item === "string") return escapeHtml(item);
+      return `${escapeHtml(item.title || item.decision || item.id || "Decision")}<small>${escapeHtml(item.rationale || item.created_at || "")}</small>`;
+    }
+
+    function researchLabel(item) {
+      return `${escapeHtml(item.title || item.question || item.artifact || "Research note")}<small>${escapeHtml(item.status || item.artifact || "")}</small>`;
+    }
+
+    function glossaryLabel(item) {
+      return `${escapeHtml(item.term || item.name || "Term")}<small>${escapeHtml(item.definition || "")}</small>`;
+    }
+
+    function adrLabel(item) {
+      return `${escapeHtml(item.title || item.path || item.id || "ADR")}<small>${escapeHtml(item.status || item.path || "")}</small>`;
+    }
+
+    function renderBranchList() {
+      const question = currentQuestion();
+      const rules = question.follow_up_logic || [];
+      if (!rules.length) {
+        els.branchList.innerHTML = `<li class="empty">No branch rules on this question.</li>`;
+        return;
+      }
+      els.branchList.innerHTML = rules.map((rule) => {
+        return `<li class="list-item">${escapeHtml(rule.when || "answer")} ${escapeHtml(rule.operator || "matches")} ${escapeHtml(String(rule.value ?? ""))}<small>${escapeHtml(rule.next_question_id || "agent creates next")} · ${escapeHtml(rule.note || "")}</small></li>`;
+      }).join("");
+    }
+
+    function go(delta) {
+      const index = currentIndex();
+      const nextIndex = index + delta;
+      if (delta > 0) {
+        const target = nextBranchTarget(currentQuestion());
+        if (target && state.questions.some((question) => question.id === target)) {
+          state.current_question = target;
+          render();
+          return;
+        }
+      }
+      if (nextIndex < 0 || nextIndex >= state.questions.length) return;
+      state.current_question = state.questions[nextIndex].id;
+      render();
+    }
+
+    function exportJson() {
+      download("questionnaire-state.json", JSON.stringify(state, null, 2), "application/json");
+      setMessage(els.exportMessage, "Exported JSON state.", "success");
+    }
+
+    function exportTranscript() {
+      const lines = [
+        "# Questionnaire Transcript",
+        "",
+        `Project: ${state.project?.name || ""}`,
+        `Run: ${state.run?.id || ""}`,
+        ""
+      ];
+      state.questions.forEach((question, index) => {
+        lines.push(`## ${index + 1}. ${question.prompt || question.id}`);
+        lines.push("");
+        lines.push(`Recommended answer: ${question.recommended_answer || ""}`);
+        lines.push("");
+        lines.push(`Why it matters: ${question.why_it_matters || ""}`);
+        lines.push("");
+        lines.push("Answer:");
+        lines.push("");
+        lines.push(typeof question.user_answer === "string" ? question.user_answer : JSON.stringify(question.user_answer, null, 2));
+        lines.push("");
+      });
+      download("questionnaire-transcript.md", lines.join("\n"), "text/markdown");
+      setMessage(els.exportMessage, "Exported transcript.", "success");
+    }
+
+    function download(filename, content, type) {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      document.body.append(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function importJson() {
+      const file = els.importFile.files?.[0];
+      if (!file) {
+        setMessage(els.exportMessage, "Choose a state.json file first.", "error");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const imported = JSON.parse(String(reader.result || ""));
+          validateImportedState(imported);
+          state = imported;
+          saveLocalDraft();
+          setMessage(els.exportMessage, "Imported state.json into browser draft.", "success");
+          render();
+        } catch (error) {
+          setMessage(els.exportMessage, error.message || "Invalid JSON import.", "error");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function validateImportedState(candidate) {
+      const required = ["run", "project", "current_question", "questions", "decisions", "glossary", "research", "adrs", "exports", "ui"];
+      const missing = required.filter((key) => !(key in candidate));
+      if (missing.length) throw new Error(`Missing state keys: ${missing.join(", ")}`);
+      if (!Array.isArray(candidate.questions) || !candidate.questions.length) {
+        throw new Error("Imported state must include at least one question.");
+      }
+    }
+
+    function clearDraft() {
+      localStorage.removeItem(STORAGE_KEY);
+      state = starterState;
+      render();
+      setMessage(els.exportMessage, "Cleared browser draft and restored embedded starter state.", "success");
+    }
+
+    function setMessage(el, text, kind) {
+      el.textContent = text;
+      el.className = `message ${kind || ""}`.trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function setActiveTab(tab) {
+      state.ui = { ...(state.ui || {}), active_tab: tab };
+      document.querySelectorAll(".tab-button").forEach((buttonEl) => {
+        buttonEl.setAttribute("aria-selected", buttonEl.dataset.tab === tab ? "true" : "false");
+      });
+      updateMobileZones();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function updateMobileZones() {
+      const tab = state.ui?.active_tab || "Question";
+      document.querySelectorAll(".zone").forEach((zone) => {
+        const zoneName = zone.dataset.zone;
+        const exportMatch = tab === "Export" && zone.classList.contains("context-zone");
+        zone.classList.toggle("active-mobile", zoneName === tab || exportMatch);
+      });
+      document.querySelectorAll(".tab-button").forEach((buttonEl) => {
+        buttonEl.setAttribute("aria-selected", buttonEl.dataset.tab === tab ? "true" : "false");
+      });
+    }
+
+    document.querySelectorAll(".tab-button").forEach((buttonEl) => {
+      buttonEl.addEventListener("click", () => setActiveTab(buttonEl.dataset.tab));
+    });
+    els.saveButton.addEventListener("click", saveLocalDraft);
+    els.prevButton.addEventListener("click", () => go(-1));
+    els.nextButton.addEventListener("click", () => go(1));
+    els.exportJsonButton.addEventListener("click", exportJson);
+    els.exportTranscriptButton.addEventListener("click", exportTranscript);
+    els.importButton.addEventListener("click", importJson);
+    els.clearDraftButton.addEventListener("click", clearDraft);
+
+    render();
+  </script>
+</body>
+</html>

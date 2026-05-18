@@ -1,0 +1,5 @@
+interface:
+  display_name: "Questionnaire"
+  short_description: "Guided decision questionnaire frontend"
+  brand_color: "#8A4D21"
+  default_prompt: "Use $questionnaire to run a guided setup interview for this plan."
