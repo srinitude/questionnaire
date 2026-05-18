@@ -8,7 +8,7 @@ export default defineConfig({
       allowedHosts: [
         "questionnaire.dev",
         "www.questionnaire.dev",
-        "site-production-eadb.up.railway.app",
+        ".railway.app",
       ],
     },
   },
