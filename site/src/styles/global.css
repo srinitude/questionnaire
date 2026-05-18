@@ -36,7 +36,7 @@ html {
 
 html:has(body.home-page) {
   height: 100%;
-  overflow: hidden;
+  overflow: clip;
 }
 
 body {
@@ -112,12 +112,12 @@ button:disabled {
   z-index: 1;
   display: grid;
   grid-template-rows: 50px auto minmax(0, 1fr);
-  width: min(100vw, 1920px);
+  width: min(calc(100vw - 4px), 1920px);
   height: 100dvh;
   min-height: 0;
   margin: 0 auto;
   padding: 0 8px;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .desk-stage::before,
@@ -175,7 +175,7 @@ button:disabled {
   top: 0;
   z-index: 10;
   min-height: 50px;
-  padding: 0 132px;
+  padding: 0 clamp(28px, 6vw, 86px);
 }
 
 .wordmark {
@@ -183,7 +183,7 @@ button:disabled {
   align-items: center;
   gap: 14px;
   min-width: max-content;
-  min-height: 40px;
+  min-height: 44px;
 }
 
 .wordmark span {
@@ -222,6 +222,11 @@ button:disabled {
 }
 
 .console-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   color: var(--parchment);
   font-size: 12px;
   letter-spacing: 0.16em;
@@ -238,8 +243,8 @@ button:disabled {
 .sun-mark {
   display: inline-grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 44px;
+  height: 44px;
   color: var(--ivory);
   font-size: 11px;
 }
@@ -264,7 +269,7 @@ button:disabled {
   justify-content: space-between;
   gap: 14px;
   min-width: 148px;
-  min-height: 32px;
+  min-height: 36px;
   padding: 0 18px;
   border: 1px solid rgba(210, 161, 93, 0.32);
   border-radius: 4px;
@@ -303,7 +308,7 @@ button:disabled {
 }
 
 .hero-console p {
-  max-width: 680px;
+  max-width: 60ch;
   margin: 4px auto 0;
   color: var(--parchment);
   font-size: 16px;
@@ -451,7 +456,7 @@ button:disabled {
 }
 
 .question-instruction {
-  max-width: 650px;
+  max-width: 58ch;
   margin: 5px auto clamp(8px, 1.1vh, 11px);
   color: var(--parchment);
   font-family: var(--font-display);
@@ -483,6 +488,7 @@ button:disabled {
 }
 
 .recommended-answer p {
+  max-width: 58ch;
   margin: -2px 24px clamp(8px, 1.2vh, 12px);
   color: var(--porcelain);
   font-family: var(--font-display);
@@ -491,8 +497,11 @@ button:disabled {
 }
 
 .why-toggle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   margin: 0 24px clamp(7px, 1vh, 9px);
-  padding: 0;
+  padding: 0 2px;
   color: var(--parchment);
   background: transparent;
   font-size: 14px;
@@ -575,8 +584,7 @@ button:disabled {
 
 textarea,
 input[type="text"],
-input[type="number"],
-.import-control input {
+input[type="number"] {
   width: 100%;
   min-width: 0;
   border: 1px solid rgba(234, 217, 182, 0.18);
@@ -598,7 +606,7 @@ textarea {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  margin-top: auto;
+  margin-top: clamp(10px, 1.4vh, 14px);
   padding-top: clamp(6px, 1vh, 8px);
   border-top: 1px solid rgba(234, 217, 182, 0.08);
 }
@@ -608,7 +616,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  min-height: 38px;
+  min-height: 44px;
   padding: 7px 18px;
   border: 1px solid rgba(234, 217, 182, 0.18);
   border-radius: 4px;
@@ -643,14 +651,7 @@ textarea {
 }
 
 .validation-line {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+  display: none;
 }
 
 .question-steps {
@@ -664,7 +665,7 @@ textarea {
 .question-step {
   position: relative;
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr) auto;
+  grid-template-columns: 36px minmax(0, 1fr);
   gap: 14px;
   align-items: start;
   min-height: clamp(55px, 8.2vh, 72px);
@@ -708,7 +709,7 @@ textarea {
   display: block;
   color: var(--ivory);
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -720,13 +721,24 @@ textarea {
 }
 
 .question-step em {
-  align-self: start;
+  position: absolute;
+  top: 0;
+  right: 0;
   padding: 2px 7px;
   border: 1px solid rgba(234, 217, 182, 0.28);
   border-radius: 3px;
   color: var(--ivory);
   background: rgba(10, 16, 13, 0.72);
   font-size: 10px;
+}
+
+.question-step em + * {
+  min-width: 0;
+}
+
+.question-step .step-copy {
+  min-width: 0;
+  padding-right: 38px;
 }
 
 .transcript-link {
@@ -872,39 +884,28 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 36px;
+  min-height: 44px;
   padding: 7px 14px;
   border: 1px solid rgba(234, 217, 182, 0.18);
   border-radius: 4px;
   color: var(--ivory);
   background: rgba(8, 11, 9, 0.74);
   cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 12px;
 }
 
 .export-stack .button {
-  min-height: 36px;
+  min-height: 44px;
   padding-block: 6px;
   font-size: 11px;
   letter-spacing: 0.07em;
   white-space: nowrap;
 }
 
-.import-control span {
-  color: var(--ivory);
-  font-size: 12px;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.import-control input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  border: 0;
+.hidden-file-input {
+  display: none;
 }
 
 .local-draft-note {
@@ -943,7 +944,12 @@ code {
 
 .local-draft-note a,
 .draft-note-actions button {
-  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 2px;
   color: #17100a;
   background: transparent;
   font-size: 11px;
@@ -956,14 +962,7 @@ code {
 }
 
 .import-status:not([data-visible="true"]) {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+  display: none;
 }
 
 .docs-overview-grid {
@@ -999,8 +998,11 @@ code {
 }
 
 .on-page a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   padding: 8px 16px;
-  border-left: 2px solid transparent;
+  border-left: 1px solid transparent;
   color: var(--parchment);
   font-size: 14px;
 }
@@ -1029,7 +1031,7 @@ code {
 .overview-copy p,
 .docs-article p,
 .docs-summary {
-  max-width: 70ch;
+  max-width: 56ch;
   color: var(--parchment);
 }
 
@@ -1140,11 +1142,12 @@ code {
 
 .docs-code-panel pre {
   margin: 0;
-  max-height: 254px;
   padding: 16px 18px 22px;
   overflow: hidden;
   color: #a9ce8c;
   font: 12px/1.55 var(--font-mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .docs-page {
@@ -1181,8 +1184,14 @@ code {
   grid-template-columns: 20px minmax(0, 1fr);
   gap: 9px;
   align-items: center;
+  min-height: 44px;
   min-width: 0;
   color: var(--parchment);
+}
+
+.docs-strip-item:hover,
+.docs-strip-item[aria-current="page"] {
+  color: var(--porcelain);
 }
 
 .docs-strip-copy {
@@ -1339,12 +1348,16 @@ code {
 }
 
 .docs-sidebar a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   padding: 10px 12px;
   color: var(--parchment);
   font-size: 14px;
 }
 
 .docs-sidebar a.active,
+.docs-sidebar a[aria-current="page"],
 .docs-sidebar a:hover {
   color: var(--porcelain);
   background: rgba(192, 138, 67, 0.14);
@@ -1386,6 +1399,7 @@ code {
 .doc-list {
   display: grid;
   gap: 9px;
+  max-width: 56ch;
   margin: 12px 0 0;
   padding: 0;
   list-style: none;
@@ -1432,12 +1446,15 @@ code {
 .doc-code-block pre {
   margin: 0;
   padding: 14px;
-  overflow-x: auto;
+  overflow-x: hidden;
   color: #b5d395;
   font: 12px/1.55 var(--font-mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .eyebrow {
+  display: inline-flex;
   margin: 0 0 10px;
   color: var(--brass-3);
   font-size: 12px;
@@ -1455,6 +1472,9 @@ code {
 }
 
 .docs-next a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--brass-3);
 }
 
@@ -1495,6 +1515,12 @@ code {
   .docs-overview-grid,
   .docs-layout {
     grid-template-columns: 1fr;
+  }
+
+  .docs-sidebar {
+    position: static;
+    top: auto;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 
   .docs-nav {
@@ -1706,14 +1732,49 @@ code {
   }
 
   .docs-nav {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 10px;
     width: min(100vw - 16px, 100%);
     min-height: 0;
-    padding: 12px 16px;
+    padding: 10px 12px;
   }
 
   .docs-strip-item {
     min-height: 44px;
+  }
+
+  .docs-layout {
+    width: min(100vw - 16px, 100%);
+    margin: 16px auto 48px;
+  }
+
+  .docs-sidebar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    overflow: visible;
+    padding: 8px;
+  }
+
+  .docs-sidebar a {
+    min-width: 0;
+    min-height: 44px;
+    padding-inline: 14px;
+    border: 1px solid rgba(234, 217, 182, 0.12);
+    border-radius: 4px;
+    white-space: normal;
+  }
+
+  .docs-strip-copy span {
+    display: none;
+  }
+
+  .docs-article {
+    padding: 24px 18px 30px;
+  }
+
+  .docs-next {
+    gap: 8px;
   }
 }
 

@@ -26,6 +26,7 @@ const saveStatusEl = document.querySelector<HTMLElement>("[data-save-status]");
 const importStatusEl = document.querySelector<HTMLElement>("[data-import-status]");
 const exportJsonButton = document.querySelector<HTMLButtonElement>("[data-export-json]");
 const exportTranscriptButton = document.querySelector<HTMLButtonElement>("[data-export-transcript]");
+const importButton = document.querySelector<HTMLButtonElement>("[data-import-button]");
 const importInput = document.querySelector<HTMLInputElement>("[data-import-json]");
 const runStepsEl = document.querySelector<HTMLElement>("[data-run-steps]");
 
@@ -197,6 +198,10 @@ exportTranscriptButton?.addEventListener("click", () => {
   downloadText("questionnaire-demo-transcript.md", exportTranscript(state), "text/markdown");
 });
 
+importButton?.addEventListener("click", () => {
+  importInput?.click();
+});
+
 importInput?.addEventListener("change", async () => {
   const file = importInput.files?.[0];
   if (!file) return;
@@ -209,6 +214,7 @@ importInput?.addEventListener("change", async () => {
   state = imported.state;
   saveState();
   setImportStatus(`Imported ${file.name}.`);
+  importInput.value = "";
   render();
 });
 

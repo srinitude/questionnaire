@@ -68,7 +68,13 @@ import { defaultSeo } from "../data/seo";
 
           <div class="options" data-question-options></div>
           <label class="answer-label" for="answer-input">Your answer (edit if needed)</label>
-          <textarea id="answer-input" data-answer-input rows="4" placeholder="Write a specific answer. The demo autosaves locally."></textarea>
+          <textarea
+            id="answer-input"
+            data-answer-input
+            rows="4"
+            aria-label="Your answer"
+            placeholder="Write a specific answer. The demo autosaves locally."
+          ></textarea>
           <div class="question-actions">
             <button class="button button-secondary" type="button" data-skip-button>Skip</button>
             <button class="button button-secondary mobile-reset" type="button" data-reset-button>Reset</button>
@@ -85,10 +91,14 @@ import { defaultSeo } from "../data/seo";
           <div class="artifact-list" data-artifacts></div>
           <p class="rail-label">Import / export</p>
           <div class="export-stack">
-            <label class="import-control">
-              <span>Import context</span>
-              <input type="file" data-import-json accept="application/json,.json" />
-            </label>
+            <button type="button" class="import-control" data-import-button>Import context</button>
+            <input
+              type="file"
+              class="hidden-file-input"
+              data-import-json
+              accept="application/json,.json"
+              aria-label="Import context JSON"
+            />
             <button type="button" class="button button-secondary" data-export-json>Export artifacts</button>
             <button type="button" class="button button-secondary" data-export-transcript>Export transcript</button>
           </div>

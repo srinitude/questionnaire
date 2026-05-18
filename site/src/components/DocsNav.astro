@@ -7,11 +7,13 @@ const sections = [
   { title: "Configuration", subtitle: "Options and settings", href: "/docs/state-schema/", icon: "gear" },
   { title: "Integrations", subtitle: "IDE, CLI, and tools", href: "/docs/browser-demo-boundaries/", icon: "plug" },
 ];
+
+const currentPath = Astro.url.pathname;
 ---
 
 <nav class="docs-nav" aria-label="Documentation">
   {sections.map((section) => (
-    <a class="docs-strip-item" href={section.href}>
+    <a class="docs-strip-item" href={section.href} aria-current={currentPath === section.href ? "page" : undefined}>
       <span class={`docs-strip-icon ${section.icon}`} aria-hidden="true"></span>
       <span class="docs-strip-copy">
         <strong>{section.title}</strong>

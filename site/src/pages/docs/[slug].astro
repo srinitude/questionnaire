@@ -82,7 +82,11 @@ const statePreview = `{
     <main class="docs-layout">
       <aside class="docs-sidebar" aria-label="Documentation sections">
         {docs.map((item) => (
-          <a class={item.slug === doc.slug ? "active" : ""} href={`/docs/${item.slug}/`}>{item.title}</a>
+          <a
+            class={item.slug === doc.slug ? "active" : ""}
+            href={`/docs/${item.slug}/`}
+            aria-current={item.slug === doc.slug ? "page" : undefined}
+          >{item.title}</a>
         ))}
       </aside>
       <article class="docs-article">
