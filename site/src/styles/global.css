@@ -253,15 +253,15 @@ button:disabled {
 .icon-link svg {
   position: relative;
   z-index: 1;
-  width: 22px;
-  height: 22px;
+  width: 25px;
+  height: 25px;
   fill: currentColor;
 }
 
 .icon-link::after {
   content: "";
   position: absolute;
-  inset: 7px;
+  inset: 5px;
   border: 1px solid rgba(210, 161, 93, 0);
   border-radius: 50%;
   background: rgba(210, 161, 93, 0);
@@ -542,15 +542,24 @@ button:disabled {
   stroke-width: 1.2;
 }
 
-.compass-star {
-  fill: rgba(210, 161, 93, 0.12);
+.compass-axis {
+  fill: none;
+  stroke: rgba(225, 176, 106, 0.42);
+  stroke-linecap: round;
+  stroke-width: 1.6;
+}
+
+.compass-needle {
+  fill: rgba(210, 161, 93, 0.22);
   stroke: var(--brass-3);
   stroke-linejoin: round;
-  stroke-width: 1.45;
+  stroke-width: 1.35;
 }
 
 .compass-dot {
-  fill: var(--brass-3);
+  fill: var(--ink);
+  stroke: var(--brass-3);
+  stroke-width: 1.1;
 }
 
 .why-block strong,
