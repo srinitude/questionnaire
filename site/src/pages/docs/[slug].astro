@@ -51,6 +51,23 @@ const statePreview = `{
           <div><strong>Artifact-first</strong><span>Clean, structured outputs you can trust.</span></div>
           <div><strong>Built for teams</strong><span>Share context, review, and iterate together.</span></div>
         </div>
+        {doc.sections?.map((section) => (
+          <section class="doc-section">
+            <h2>{section.title}</h2>
+            {section.body?.map((paragraph) => <p>{paragraph}</p>)}
+            {section.bullets ? (
+              <ul class="doc-list">
+                {section.bullets.map((bullet) => <li>{bullet}</li>)}
+              </ul>
+            ) : null}
+            {section.code ? (
+              <div class="doc-code-block">
+                <span>{section.code.label}</span>
+                <pre><code>{section.code.source}</code></pre>
+              </div>
+            ) : null}
+          </section>
+        ))}
         <div class="docs-next">
           <a href="/">Return to live demo</a>
           <a href="https://github.com/srinitude/questionnaire">View source</a>
@@ -73,6 +90,23 @@ const statePreview = `{
         <h1>{doc.title}</h1>
         <p class="docs-summary">{doc.summary}</p>
         {doc.body.map((paragraph) => <p>{paragraph}</p>)}
+        {doc.sections?.map((section) => (
+          <section class="doc-section">
+            <h2>{section.title}</h2>
+            {section.body?.map((paragraph) => <p>{paragraph}</p>)}
+            {section.bullets ? (
+              <ul class="doc-list">
+                {section.bullets.map((bullet) => <li>{bullet}</li>)}
+              </ul>
+            ) : null}
+            {section.code ? (
+              <div class="doc-code-block">
+                <span>{section.code.label}</span>
+                <pre><code>{section.code.source}</code></pre>
+              </div>
+            ) : null}
+          </section>
+        ))}
         <div class="docs-next">
           <a href="/">Return to live demo</a>
           <a href="https://github.com/srinitude/questionnaire">View source</a>

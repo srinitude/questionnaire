@@ -62,6 +62,8 @@ describe("screenshot-led visual contract", () => {
     });
     expect(docsPage).toContain("docs-overview-grid");
     expect(css).toContain("docs-strip-item");
+    expect(css).toContain("doc-section");
+    expect(css).toContain("doc-code-block");
     expect(css).toContain("grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.28fr)");
   });
 });
