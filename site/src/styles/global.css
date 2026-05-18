@@ -240,18 +240,42 @@ button:disabled {
 }
 
 .icon-link {
+  position: relative;
   display: inline-grid;
   place-items: center;
   width: 44px;
   height: 44px;
   color: var(--ivory);
   font-size: 11px;
+  transition: color 180ms var(--ease), transform 180ms var(--ease);
 }
 
 .icon-link svg {
-  width: 19px;
-  height: 19px;
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
   fill: currentColor;
+}
+
+.icon-link::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(210, 161, 93, 0);
+  border-radius: 50%;
+  background: rgba(210, 161, 93, 0);
+  transition: border-color 180ms var(--ease), background 180ms var(--ease);
+}
+
+.icon-link:hover {
+  color: var(--porcelain);
+  transform: translateY(-1px);
+}
+
+.icon-link:hover::after {
+  border-color: rgba(210, 161, 93, 0.34);
+  background: rgba(210, 161, 93, 0.08);
 }
 
 .draft-pill {
@@ -509,12 +533,24 @@ button:disabled {
 .compass {
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(225, 176, 106, 0.48);
-  border-radius: 50%;
-  background:
-    linear-gradient(45deg, transparent 43%, var(--brass-3) 44% 46%, transparent 47%),
-    linear-gradient(-45deg, transparent 43%, var(--brass-3) 44% 46%, transparent 47%),
-    radial-gradient(circle, rgba(192, 138, 67, 0.26), transparent 60%);
+  overflow: visible;
+}
+
+.compass-ring {
+  fill: rgba(192, 138, 67, 0.08);
+  stroke: rgba(225, 176, 106, 0.5);
+  stroke-width: 1.2;
+}
+
+.compass-star {
+  fill: rgba(210, 161, 93, 0.12);
+  stroke: var(--brass-3);
+  stroke-linejoin: round;
+  stroke-width: 1.45;
+}
+
+.compass-dot {
+  fill: var(--brass-3);
 }
 
 .why-block strong,
