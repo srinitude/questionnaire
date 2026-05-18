@@ -8,13 +8,13 @@ import {
 } from "../src/lib/questionnaire-state";
 
 describe("questionnaire demo state", () => {
-  it("ships a valid adoption/self-setup seed state with the skill schema", () => {
+  it("ships a valid decision-grade seed state with the skill schema", () => {
     const state = seedQuestionnaireState();
     const validation = validateQuestionnaireState(state);
 
     expect(validation.valid).toBe(true);
-    expect(state.current_question).toBe("q-adoption-fit");
-    expect(state.questions[0]?.recommended_answer).toContain("Use Questionnaire");
+    expect(state.current_question).toBe("q-problem-definition");
+    expect(state.questions[0]?.recommended_answer).toContain("repeatable process");
     expect(state.exports).toEqual({
       transcript: "transcript.md",
       context: "CONTEXT.md",
@@ -28,8 +28,8 @@ describe("questionnaire demo state", () => {
 
     expect(next.questions[0]?.status).toBe("answered");
     expect(next.questions[0]?.user_answer).toContain("product architecture");
-    expect(next.decisions.at(-1)?.decision).toContain("visitor workflow");
-    expect(next.current_question).toBe("q-artifact-trust");
+    expect(next.decisions.at(-1)?.decision).toContain("core problem");
+    expect(next.current_question).toBe("q-context-goals");
   });
 
   it("imports only valid questionnaire-shaped JSON", () => {
@@ -50,8 +50,8 @@ describe("questionnaire demo state", () => {
     const transcript = exportTranscript(state);
 
     expect(transcript).toContain("# Questionnaire Demo Transcript");
-    expect(transcript).toContain("Question: Should your team adopt Questionnaire");
+    expect(transcript).toContain("Question: What is the core problem we are trying to solve?");
     expect(transcript).toContain("Answer: Use it for architecture reviews.");
-    expect(transcript).toContain("Decision: Capture visitor workflow fit");
+    expect(transcript).toContain("Decision: Capture the core problem");
   });
 });

@@ -21,7 +21,7 @@
 
 ### Steps
 
-1. Agent creates the run directory and opens or links `index.html`.
+1. Agent creates the run directory and opens `index.html` immediately.
 2. Agent rewrites the starter question for the actual task.
 3. User answers in chat or in the frontend.
 4. Agent updates `state.json` and `transcript.md`.

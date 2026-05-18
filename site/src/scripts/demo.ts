@@ -17,7 +17,8 @@ const whyEl = document.querySelector<HTMLElement>("[data-question-why]");
 const optionsEl = document.querySelector<HTMLElement>("[data-question-options]");
 const answerInput = document.querySelector<HTMLTextAreaElement>("[data-answer-input]");
 const answerButton = document.querySelector<HTMLButtonElement>("[data-answer-button]");
-const resetButton = document.querySelector<HTMLButtonElement>("[data-reset-button]");
+const resetButtons = document.querySelectorAll<HTMLButtonElement>("[data-reset-button]");
+const skipButton = document.querySelector<HTMLButtonElement>("[data-skip-button]");
 const artifactsEl = document.querySelector<HTMLElement>("[data-artifacts]");
 const counterEl = document.querySelector<HTMLElement>("[data-question-counter]");
 const validationEl = document.querySelector<HTMLElement>("[data-validation-state]");
@@ -26,6 +27,7 @@ const importStatusEl = document.querySelector<HTMLElement>("[data-import-status]
 const exportJsonButton = document.querySelector<HTMLButtonElement>("[data-export-json]");
 const exportTranscriptButton = document.querySelector<HTMLButtonElement>("[data-export-transcript]");
 const importInput = document.querySelector<HTMLInputElement>("[data-import-json]");
+const runStepsEl = document.querySelector<HTMLElement>("[data-run-steps]");
 
 let state = loadState();
 
@@ -60,7 +62,7 @@ function render(): void {
   if (whyEl) whyEl.textContent = question.why_it_matters;
   if (counterEl) counterEl.textContent = `Question ${activeIndex + 1} of ${state.questions.length}`;
   if (validationEl) validationEl.textContent = validation.valid ? "Valid state" : `${validation.errors.length} state issue`;
-  if (answerInput) answerInput.value = question.user_answer;
+  if (answerInput) answerInput.value = question.user_answer || question.recommended_answer;
 
   if (optionsEl) {
     optionsEl.innerHTML = "";
@@ -80,22 +82,80 @@ function render(): void {
     });
   }
 
+  renderRunSteps(activeIndex);
   renderArtifacts();
+}
+
+function renderRunSteps(activeIndex: number): void {
+  if (!runStepsEl) return;
+
+  runStepsEl.innerHTML = state.questions
+    .map((question, index) => {
+      const stateLabel = index === activeIndex ? "ACTIVE" : question.status === "answered" ? "DONE" : "";
+      const detail = question.status === "answered" ? "answered" : index === activeIndex ? "live now" : "pending";
+      return `
+        <li class="question-step${index === activeIndex ? " is-active" : ""}${question.status === "answered" ? " is-done" : ""}">
+          <span class="step-number">${index + 1}</span>
+          <span class="step-copy">
+            <strong>${escapeHtml(stepTitle(question.prompt))}</strong>
+            <small>${detail}</small>
+          </span>
+          ${stateLabel ? `<em>${stateLabel}</em>` : ""}
+        </li>
+      `;
+    })
+    .join("");
+}
+
+function stepTitle(prompt: string): string {
+  if (/core problem/i.test(prompt)) return "Problem Definition";
+  if (/context and goals/i.test(prompt)) return "Context & Goals";
+  if (/constraints/i.test(prompt)) return "Constraints";
+  if (/options/i.test(prompt)) return "Options";
+  if (/risks and tradeoffs/i.test(prompt)) return "Risks & Tradeoffs";
+  if (/success criteria/i.test(prompt)) return "Success Criteria";
+  return prompt.replace(/\?$/, "");
 }
 
 function renderArtifacts(): void {
   if (!artifactsEl) return;
   const artifacts = [
-    ["state.json", `${state.questions.filter((question) => question.status === "answered").length}/${state.questions.length} answered`],
-    ["transcript.md", `${state.decisions.length} decisions captured`],
-    ["CONTEXT.md", `${state.glossary.length} glossary terms`],
-    ["research/", `${state.research.length} notes`],
-    ["adrs/", `${state.adrs.length} records`],
+    { name: "state.json", detail: "Live state", kind: "file", live: true },
+    { name: "transcript.md", detail: "Running transcript", kind: "file", live: false },
+    { name: "CONTEXT.md", detail: "Project context", kind: "file", live: false },
+    { name: "research/", detail: `${state.research.length} items`, kind: "folder", live: false },
+    { name: "adrs/", detail: `${state.adrs.length} items`, kind: "folder", live: false },
   ];
 
   artifactsEl.innerHTML = artifacts
-    .map(([name, detail]) => `<div class="artifact-row"><code>${name}</code><span>${detail}</span></div>`)
+    .map(
+      (artifact) => `
+        <div class="artifact-row" data-kind="${artifact.kind}">
+          <span class="artifact-icon" aria-hidden="true"></span>
+          <span class="artifact-copy">
+            <code>${escapeHtml(artifact.name)}</code>
+            <span>${escapeHtml(artifact.detail)}</span>
+          </span>
+          ${artifact.live ? `<i aria-hidden="true"></i>` : ""}
+        </div>
+      `,
+    )
     .join("");
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function setImportStatus(message: string, visible = true): void {
+  if (!importStatusEl) return;
+  importStatusEl.textContent = message;
+  importStatusEl.dataset.visible = visible ? "true" : "false";
 }
 
 answerInput?.addEventListener("input", () => {
@@ -107,7 +167,7 @@ answerInput?.addEventListener("input", () => {
 answerButton?.addEventListener("click", () => {
   const answer = answerInput?.value.trim();
   if (!answer) {
-    if (importStatusEl) importStatusEl.textContent = "Write an answer before advancing.";
+    setImportStatus("Write an answer before advancing.");
     return;
   }
   state = answerCurrentQuestion(state, answer);
@@ -115,10 +175,17 @@ answerButton?.addEventListener("click", () => {
   render();
 });
 
-resetButton?.addEventListener("click", () => {
+resetButtons.forEach((resetButton) => resetButton.addEventListener("click", () => {
   state = seedQuestionnaireState();
   window.localStorage.removeItem(STORAGE_KEY);
-  if (importStatusEl) importStatusEl.textContent = "Draft reset. Browser storage cleared.";
+  setImportStatus("Draft reset. Browser storage cleared.");
+  render();
+}));
+
+skipButton?.addEventListener("click", () => {
+  const fallback = activeQuestion().recommended_answer || "Skipped in browser demo.";
+  state = answerCurrentQuestion(state, fallback);
+  saveState();
   render();
 });
 
@@ -136,12 +203,12 @@ importInput?.addEventListener("change", async () => {
   const source = await file.text();
   const imported = importQuestionnaireState(source);
   if (!imported.valid || !imported.state) {
-    if (importStatusEl) importStatusEl.textContent = imported.errors.join(" ");
+    setImportStatus(imported.errors.join(" "));
     return;
   }
   state = imported.state;
   saveState();
-  if (importStatusEl) importStatusEl.textContent = `Imported ${file.name}.`;
+  setImportStatus(`Imported ${file.name}.`);
   render();
 });
 

@@ -1,122 +1,108 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { docs } from "../data/docs";
 import { defaultSeo } from "../data/seo";
 ---
 
 <BaseLayout bodyClass="home-page" title={defaultSeo.title} description={defaultSeo.description}>
-  <main class="app-shell" data-questionnaire-demo>
-    <header class="topbar" aria-label="Site header">
-      <a class="brand" href="/" aria-label="Questionnaire home">
-        <span class="seal" aria-hidden="true"></span>
-        <span>
-          <strong>Questionnaire</strong>
-          <small>Agent Skill decision run</small>
-        </span>
+  <main class="desk-stage" data-questionnaire-demo>
+    <header class="site-chrome" aria-label="Site header">
+      <a class="wordmark" href="/" aria-label="Questionnaire home">
+        <span>questionnaire.dev</span>
+        <em>Agent Skill</em>
       </a>
-      <nav class="topnav" aria-label="Primary">
-        <a href="#demo">Demo</a>
-        <a href="#artifacts">Artifacts</a>
-        <a href="/docs/get-started/">Docs</a>
-        <a href="https://github.com/srinitude/questionnaire">GitHub</a>
+      <nav class="console-nav" aria-label="Primary">
+        <a href="/docs/overview/">Overview</a>
+        <a href="/docs/get-started/">Guides</a>
+        <a href="/docs/state-schema/">Reference</a>
+        <a href="/docs/browser-demo-boundaries/">Skill docs</a>
+        <a href="/docs/artifact-model/">ADRs</a>
+        <a href="/docs/question-types/">Examples</a>
       </nav>
-      <div class="statusline"><span class="dot" aria-hidden="true"></span><span data-save-status>Local draft ready</span></div>
+      <div class="chrome-actions" aria-label="Utility">
+        <a class="icon-link" href="https://github.com/srinitude/questionnaire" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 .7a11.4 11.4 0 0 0-3.6 22.2c.6.1.8-.3.8-.6v-2.2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1.6 2.2 2.7 1.6.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.6 0-1.2.4-2.3 1.1-3.1-.1-.3-.5-1.6.1-3.1 0 0 .9-.3 3.1 1.2.9-.3 1.8-.4 2.8-.4.9 0 1.9.1 2.8.4 2.1-1.5 3.1-1.2 3.1-1.2.6 1.5.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3.1 0 4.4-2.7 5.3-5.3 5.6.4.4.8 1.1.8 2.1v3.1c0 .3.2.7.8.6A11.4 11.4 0 0 0 12 .7Z" />
+          </svg>
+        </a>
+        <span class="sun-mark" aria-hidden="true"></span>
+        <div class="draft-pill"><span data-save-status>Local draft</span><i aria-hidden="true"></i></div>
+      </div>
     </header>
 
-    <section class="hero" id="demo" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">Browser-local skill demo</p>
-        <h1 id="hero-title">Interrogate the decision until it leaves artifacts.</h1>
-        <p class="hero-lede">
-          A real questionnaire run surface: one active question, recommended answer, rationale, local state,
-          transcript export, and an honest boundary between browser drafts and agent-written files.
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#run-panel">Try the run<span aria-hidden="true">↗</span></a>
-          <a class="button button-secondary" href="/docs/artifact-model/">Study artifacts</a>
-        </div>
-      </div>
-      <div class="hero-proof" aria-label="Approved behavior">
-        <span>state.json schema</span>
-        <span>localStorage autosave</span>
-        <span>JSON import/export</span>
-        <span>agent-managed filesystem</span>
-      </div>
+    <section class="hero-console" id="demo" aria-labelledby="hero-title">
+      <h1 id="hero-title">Run a questionnaire. Produce decision-grade artifacts.</h1>
+      <p>Questionnaire is an Agent Skill for high-signal intake and decision scaffolding.</p>
+      <p class="hero-kicker">Live questionnaire run</p>
     </section>
 
-    <section class="run-grid" id="run-panel">
-      <aside class="panel rail trail-rail" aria-label="Artifact trail">
-        <div class="panel-core">
-          <p class="eyebrow">Trail</p>
-          <h2>Run artifacts</h2>
-          <div class="artifact-list" data-artifacts></div>
-          <div class="rail-note">
-            Browser state stays here until you export it. In the real skill, the agent writes the run directory.
-          </div>
+    <section class="workbench" id="run-panel" aria-label="Live questionnaire run">
+      <aside class="console-panel rail-panel artifact-panel" aria-label="Artifact trail">
+        <div class="brass-plate">Artifact trail</div>
+        <div class="panel-inner">
+          <ol class="question-steps" data-run-steps></ol>
+          <a class="transcript-link" href="/docs/artifact-model/">View transcript.md</a>
         </div>
       </aside>
 
-      <section class="panel question-panel" aria-label="Active questionnaire question">
-        <div class="panel-core">
-          <div class="question-meta">
-            <span data-question-counter>Question 1 of 3</span>
-            <span data-validation-state>Valid state</span>
-          </div>
-          <p class="eyebrow">Active question</p>
+      <section class="console-panel active-panel" aria-label="Active questionnaire question">
+        <div class="panel-inner">
+          <div class="question-counter" data-question-counter>Question 1 of 6</div>
           <h2 data-question-prompt>Loading question...</h2>
-          <div class="recommendation">
-            <strong>Recommended answer</strong>
+          <p class="question-instruction">
+            Define the underlying problem as clearly and specifically as possible. Focus on the root cause, not symptoms or solutions.
+          </p>
+
+          <div class="recommended-answer">
+            <span>Recommended answer</span>
             <p data-question-recommendation></p>
+            <button type="button" class="why-toggle">Why this answer?</button>
           </div>
-          <div class="why">
-            <strong>Why it matters</strong>
-            <p data-question-why></p>
+
+          <div class="why-block">
+            <span class="compass" aria-hidden="true"></span>
+            <div>
+              <strong>Why it matters</strong>
+              <p data-question-why></p>
+            </div>
           </div>
+
           <div class="options" data-question-options></div>
-          <label class="answer-label" for="answer-input">Your answer</label>
-          <textarea id="answer-input" data-answer-input rows="5" placeholder="Write a specific answer. The demo autosaves locally."></textarea>
+          <label class="answer-label" for="answer-input">Your answer (edit if needed)</label>
+          <textarea id="answer-input" data-answer-input rows="4" placeholder="Write a specific answer. The demo autosaves locally."></textarea>
           <div class="question-actions">
-            <button class="button button-primary" type="button" data-answer-button>Answer and advance<span aria-hidden="true">↗</span></button>
-            <button class="button button-secondary" type="button" data-reset-button>Reset draft</button>
+            <button class="button button-secondary" type="button" data-skip-button>Skip</button>
+            <button class="button button-secondary mobile-reset" type="button" data-reset-button>Reset</button>
+            <button class="button button-primary" type="button" data-answer-button>Save & continue<span aria-hidden="true">→</span></button>
           </div>
+          <div class="validation-line" data-validation-state>Valid state</div>
         </div>
       </section>
 
-      <aside class="panel rail context-rail" aria-label="Context and export">
-        <div class="panel-core">
-          <p class="eyebrow">Context</p>
-          <h2>Filesystem boundary</h2>
-          <p>
-            The browser can draft, validate, import, and export. The agent writes durable files:
-            <code>state.json</code>, <code>transcript.md</code>, <code>CONTEXT.md</code>, research notes, and ADRs.
-          </p>
+      <aside class="console-panel rail-panel context-panel" aria-label="Context and export">
+        <div class="brass-plate">Context & export</div>
+        <div class="panel-inner">
+          <p class="rail-label">Current context</p>
+          <div class="artifact-list" data-artifacts></div>
+          <p class="rail-label">Import / export</p>
           <div class="export-stack">
-            <button type="button" class="button button-secondary" data-export-json>Export JSON</button>
-            <button type="button" class="button button-secondary" data-export-transcript>Export transcript</button>
             <label class="import-control">
-              <span>Import state.json</span>
+              <span>Import context</span>
               <input type="file" data-import-json accept="application/json,.json" />
             </label>
+            <button type="button" class="button button-secondary" data-export-json>Export artifacts</button>
+            <button type="button" class="button button-secondary" data-export-transcript>Export transcript</button>
           </div>
           <output class="import-status" data-import-status>Ready for import or export.</output>
+          <div class="local-draft-note">
+            <strong>Local draft <i aria-hidden="true"></i></strong>
+            <p>Browser autosaves locally. Export is the handoff.</p>
+            <div class="draft-note-actions">
+              <a href="/docs/browser-demo-boundaries/">Docs →</a>
+              <button type="button" data-reset-button>Reset</button>
+            </div>
+          </div>
         </div>
       </aside>
-    </section>
-
-    <section class="docs-band" id="artifacts" aria-labelledby="docs-title">
-      <div class="section-heading">
-        <p class="eyebrow">Operator docs</p>
-        <h2 id="docs-title">Concise docs around the run, not a separate brochure.</h2>
-        <p>Each route answers a decision a serious adopter needs before installing the skill.</p>
-      </div>
-      <div class="docs-grid">
-        {docs.map((doc) => (
-          <a class="doc-card" href={`/docs/${doc.slug}/`}>
-            <span>{doc.title}</span>
-            <p>{doc.summary}</p>
-          </a>
-        ))}
-      </div>
     </section>
   </main>
   <script src="../scripts/demo.ts"></script>

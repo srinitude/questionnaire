@@ -164,14 +164,9 @@ def write_initial_files(project_dir: Path, run_dir: Path, timestamp: str) -> Non
 
 
 def should_open(args: argparse.Namespace) -> bool:
-    if args.open:
-        return True
     if args.no_open:
         return False
-    if not sys.stdin.isatty():
-        return False
-    raw = input("Open generated index.html in a browser? [y/N]: ").strip().lower()
-    return raw in {"y", "yes"}
+    return True
 
 
 def main() -> int:
@@ -179,7 +174,11 @@ def main() -> int:
         description="Start a run-scoped questionnaire session."
     )
     open_group = parser.add_mutually_exclusive_group()
-    open_group.add_argument("--open", action="store_true", help="Open index.html without prompting.")
+    open_group.add_argument(
+        "--open",
+        action="store_true",
+        help="Open index.html in the default browser. This is the default and is kept for compatibility.",
+    )
     open_group.add_argument("--no-open", action="store_true", help="Do not open index.html.")
     parser.add_argument("--project-dir", help="Explicit project root.")
     parser.add_argument("--timestamp", help="Deterministic timestamp: YYYY-MM-DD:HH-MM-SS.")
@@ -204,7 +203,7 @@ def main() -> int:
     print(f"Run directory: {run_dir}")
     print(f"Index URL: {url}")
     if opened == "no":
-        print("Open the Index URL in a browser, or run again with --open.")
+        print("Opening skipped by --no-open.")
     else:
         print("Opened index.html in the default browser.")
     return 0

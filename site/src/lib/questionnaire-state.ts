@@ -161,52 +161,98 @@ export function seedQuestionnaireState(): QuestionnaireState {
       name: "questionnaire.dev adoption run",
       root_markers: ["site-demo"],
     },
-    current_question: "q-adoption-fit",
+    current_question: "q-problem-definition",
     questions: [
       question(
-        "q-adoption-fit",
+        "q-problem-definition",
         "active",
-        "Should your team adopt Questionnaire for the decisions you are about to make?",
-        "Use Questionnaire when the decision needs one firm question at a time, visible rationale, and durable artifacts instead of a loose chat transcript.",
-        "The answer determines whether this workflow should become part of your project setup or remain an occasional planning tool.",
+        "What is the core problem we are trying to solve?",
+        "We lack a consistent, repeatable process for capturing stakeholder context and converting it into decision-ready documentation.",
+        "A clear problem definition anchors every downstream decision. It reduces rework, aligns stakeholders, and improves the quality of options we generate.",
+        "freeform",
+        [
+          {
+            label: "Use the recommendation",
+            value: "recommended",
+            description: "Keep the decision focused on repeatable context capture and artifacts.",
+          },
+          {
+            label: "Narrow the problem",
+            value: "narrow",
+            description: "Make the scope smaller before choosing options or artifacts.",
+          },
+          {
+            label: "Rewrite from scratch",
+            value: "rewrite",
+            description: "Use the browser draft as a prompt for the agent-managed run.",
+          },
+        ],
+      ),
+      question(
+        "q-context-goals",
+        "pending",
+        "Which context and goals must the answer preserve?",
+        "Capture the stakeholders, deadline, decision owner, success horizon, and the artifacts that need to survive after the conversation.",
+        "Context and goals prevent the questionnaire from optimizing for a tidy answer while losing the reason the decision matters.",
         "single_choice",
         [
           {
-            label: "Adopt for this work",
-            value: "adopt",
-            description: "Use the skill when decisions need traceable artifacts and follow-up pressure.",
+            label: "Stakeholder alignment",
+            value: "stakeholder_alignment",
+            description: "The run should resolve who needs to trust the answer.",
           },
           {
-            label: "Use occasionally",
-            value: "occasional",
-            description: "Keep it for high-risk planning, architecture, research, or design sessions.",
+            label: "Execution clarity",
+            value: "execution_clarity",
+            description: "The run should produce next steps and durable ownership.",
           },
           {
-            label: "Not a fit",
-            value: "not_fit",
-            description: "Skip when a normal checklist or short discussion is enough.",
+            label: "Research confidence",
+            value: "research_confidence",
+            description: "The run should identify what evidence must be checked.",
           },
         ],
       ),
       question(
-        "q-artifact-trust",
+        "q-constraints",
         "pending",
-        "Which artifact would make this decision feel trustworthy after the chat ends?",
-        "Start with state.json and transcript.md, then add CONTEXT.md, research notes, or ADRs only when the answer changes reusable terms, evidence, or hard-to-reverse choices.",
-        "The artifact set is the difference between a useful interrogation and a memory-hole conversation.",
+        "What constraints should shape the options?",
+        "List the non-negotiables first: time, budget, technical boundaries, privacy requirements, review expectations, and the cost of reversing the choice.",
+        "Constraints turn an open-ended discussion into a decision-grade comparison surface.",
         "multi_choice",
         [
-          { label: "state.json", value: "state", description: "Source of truth for run state and questions." },
-          { label: "transcript.md", value: "transcript", description: "Readable record of questions, recommendations, and answers." },
-          { label: "ADRs", value: "adrs", description: "Durable records for hard-to-reverse decisions." },
+          { label: "Time", value: "time", description: "Deadline, sequencing, and review windows." },
+          { label: "Technical fit", value: "technical_fit", description: "Stack, integration, and maintenance boundaries." },
+          { label: "Security/privacy", value: "security_privacy", description: "Data exposure, permissions, and local artifact rules." },
         ],
       ),
       question(
-        "q-boundary",
+        "q-options",
         "pending",
-        "Where should the browser stop and the agent take over?",
-        "Let the browser draft, validate, import, and export. Let the agent write files, run research, update ADRs, and validate project-local state.",
-        "A clear boundary protects privacy and avoids implying that a static website can write to a visitor's filesystem.",
+        "Which options are actually on the table?",
+        "Compare only options someone can execute, reject, or research next. Do not include vague preferences as options.",
+        "Options are where teams often confuse taste for a decision. Naming executable choices keeps the run honest.",
+        "ranked_choice",
+        [
+          { label: "Use Questionnaire now", value: "use_now", description: "Run the skill for the current decision." },
+          { label: "Prototype manually", value: "manual", description: "Use a lightweight checklist without artifacts." },
+          { label: "Defer the workflow", value: "defer", description: "Wait until the decision has higher consequence." },
+        ],
+      ),
+      question(
+        "q-risks-tradeoffs",
+        "pending",
+        "What risks and tradeoffs deserve explicit pressure?",
+        "Record the cost of being wrong, what the team gives up, and which assumptions need research before the decision is treated as stable.",
+        "Risk pressure is what separates a useful questionnaire from a polished confirmation bias machine.",
+        "freeform",
+      ),
+      question(
+        "q-success-criteria",
+        "pending",
+        "What success criteria would make the decision defensible later?",
+        "Define observable evidence that the decision worked, who will review it, and which artifact should be revisited if reality changes.",
+        "Success criteria make the transcript and ADRs useful after the original conversation is forgotten.",
         "freeform",
       ),
     ],
@@ -221,8 +267,35 @@ export function seedQuestionnaireState(): QuestionnaireState {
         definition: "The agent, not browser JavaScript, writes durable files to the user's project.",
       },
     ],
-    research: [],
-    adrs: [],
+    research: [
+      {
+        id: "research-browser-boundary",
+        artifact: "research/browser-boundary.md",
+        summary: "Browser drafts stay local; durable filesystem writes are agent-managed.",
+      },
+      {
+        id: "research-state-recovery",
+        artifact: "research/state-recovery.md",
+        summary: "state.json is the recovery point for resuming or transferring a run.",
+      },
+      {
+        id: "research-adoption-fit",
+        artifact: "research/adoption-fit.md",
+        summary: "The skill fits decisions that need evidence, rationale, and a reviewable trail.",
+      },
+    ],
+    adrs: [
+      {
+        id: "adr-0001-local-drafts",
+        path: "adrs/0001-local-drafts-agent-filesystem.md",
+        title: "Keep browser drafts local and make filesystem writes agent-managed",
+      },
+      {
+        id: "adr-0002-run-directory",
+        path: "adrs/0002-run-directory-as-contract.md",
+        title: "Use the run directory as the durable contract",
+      },
+    ],
     exports: {
       transcript: "transcript.md",
       context: "CONTEXT.md",
@@ -231,7 +304,7 @@ export function seedQuestionnaireState(): QuestionnaireState {
     ui: {
       active_tab: "Question",
       layout: "agent_guided",
-      theme: "dark_lacquer_brass",
+      theme: "engraved_lacquer_brass",
       local_draft_enabled: true,
     },
   };
@@ -308,8 +381,8 @@ export function answerCurrentQuestion(state: QuestionnaireState, answer: string)
   next.decisions.push({
     id: `d-${String(next.decisions.length + 1).padStart(4, "0")}`,
     question_id: current.id,
-    decision: current.id === "q-adoption-fit"
-      ? "Capture visitor workflow fit and continue into artifact trust."
+    decision: current.id === "q-problem-definition"
+      ? "Capture the core problem and continue into context and goals."
       : `Capture answer for ${current.prompt}`,
     created_at: "2026-05-18:00-00-00",
   });

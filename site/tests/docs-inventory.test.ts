@@ -4,6 +4,7 @@ import { docs } from "../src/data/docs";
 describe("operator docs inventory", () => {
   it("ships the approved visitor-facing docs without Railway deployment docs", () => {
     expect(docs.map((doc) => doc.slug)).toEqual([
+      "overview",
       "get-started",
       "artifact-model",
       "state-schema",

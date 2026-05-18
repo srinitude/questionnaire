@@ -7,6 +7,14 @@ export interface DocPage {
 
 export const docs: DocPage[] = [
   {
+    slug: "overview",
+    title: "Overview",
+    summary: "Questionnaire runs are guided, stateful conversations that produce decision-grade artifacts.",
+    body: [
+      "It keeps teams aligned, captures rationale, and accelerates high-quality decisions.",
+    ],
+  },
+  {
     slug: "get-started",
     title: "Get started",
     summary: "Install the skill and start a project-local questionnaire run.",

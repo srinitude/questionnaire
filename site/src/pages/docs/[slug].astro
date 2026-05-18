@@ -14,25 +14,70 @@ if (!doc) {
 
 const title = `${doc.title} | Questionnaire docs`;
 const description = doc.summary;
+const isOverview = doc.slug === "overview";
+const statePreview = `{
+  "runId": "run_01JY4X6T9S0M8Z6Q8Z8P0H3",
+  "version": "1.0.0",
+  "updatedAt": "2026-05-20T14:22:11Z",
+  "currentQuestion": 1,
+  "totalQuestions": 6,
+  "answers": {
+    "q1": "We lack a consistent, repeatable process
+      for capturing stakeholder context and
+      converting it into decision-ready artifacts."
+  }
+}`;
 ---
 
 <BaseLayout title={title} description={description} canonicalPath={`/docs/${doc.slug}/`} bodyClass="docs-page">
   <DocsNav />
-  <main class="docs-layout">
-    <aside class="docs-sidebar" aria-label="Documentation sections">
-      {docs.map((item) => (
-        <a class={item.slug === doc.slug ? "active" : ""} href={`/docs/${item.slug}/`}>{item.title}</a>
-      ))}
-    </aside>
-    <article class="docs-article">
-      <p class="eyebrow">Questionnaire docs</p>
-      <h1>{doc.title}</h1>
-      <p class="docs-summary">{doc.summary}</p>
-      {doc.body.map((paragraph) => <p>{paragraph}</p>)}
-      <div class="docs-next">
-        <a href="/">Return to live demo</a>
-        <a href="https://github.com/srinitude/questionnaire">View source</a>
-      </div>
-    </article>
-  </main>
+  {isOverview ? (
+    <main class="docs-overview-grid">
+      <aside class="on-page">
+        <span>On this page</span>
+        <a href="/docs/overview/">Overview</a>
+        <a href="/docs/get-started/">When to use</a>
+        <a href="/docs/artifact-model/">Key capabilities</a>
+        <a href="/docs/state-schema/">Artifacts</a>
+      </aside>
+      <article class="docs-article overview-copy">
+        <p class="eyebrow">Questionnaire docs</p>
+        <h1>{doc.title}</h1>
+        <p class="docs-summary">{doc.summary}</p>
+        {doc.body.map((paragraph) => <p>{paragraph}</p>)}
+        <div class="capability-grid">
+          <div><strong>Guided intake</strong><span>High-signal questions, in the right order.</span></div>
+          <div><strong>Stateful by design</strong><span>Resumable runs with durable state.</span></div>
+          <div><strong>Artifact-first</strong><span>Clean, structured outputs you can trust.</span></div>
+          <div><strong>Built for teams</strong><span>Share context, review, and iterate together.</span></div>
+        </div>
+        <div class="docs-next">
+          <a href="/">Return to live demo</a>
+          <a href="https://github.com/srinitude/questionnaire">View source</a>
+        </div>
+      </article>
+      <aside class="docs-code-panel" aria-label="State schema preview">
+        <div class="code-tabs"><span>state.json</span><span>transcript.md</span><span>CONTEXT.md</span></div>
+        <pre><code>{statePreview}</code></pre>
+      </aside>
+    </main>
+  ) : (
+    <main class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Documentation sections">
+        {docs.map((item) => (
+          <a class={item.slug === doc.slug ? "active" : ""} href={`/docs/${item.slug}/`}>{item.title}</a>
+        ))}
+      </aside>
+      <article class="docs-article">
+        <p class="eyebrow">Questionnaire docs</p>
+        <h1>{doc.title}</h1>
+        <p class="docs-summary">{doc.summary}</p>
+        {doc.body.map((paragraph) => <p>{paragraph}</p>)}
+        <div class="docs-next">
+          <a href="/">Return to live demo</a>
+          <a href="https://github.com/srinitude/questionnaire">View source</a>
+        </div>
+      </article>
+    </main>
+  )}
 </BaseLayout>

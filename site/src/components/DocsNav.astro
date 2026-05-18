@@ -1,12 +1,22 @@
+---
+const sections = [
+  { title: "Getting started", subtitle: "Run your first questionnaire", href: "/docs/get-started/", icon: "shield" },
+  { title: "How it works", subtitle: "Flow, state, and artifacts", href: "/docs/agent-workflow/", icon: "network" },
+  { title: "Artifacts", subtitle: "state.json, transcript.md, CONTEXT.md", href: "/docs/artifact-model/", icon: "file" },
+  { title: "Patterns", subtitle: "Recommended practices", href: "/docs/question-types/", icon: "pattern" },
+  { title: "Configuration", subtitle: "Options and settings", href: "/docs/state-schema/", icon: "gear" },
+  { title: "Integrations", subtitle: "IDE, CLI, and tools", href: "/docs/browser-demo-boundaries/", icon: "plug" },
+];
+---
+
 <nav class="docs-nav" aria-label="Documentation">
-  <a class="docs-nav__brand" href="/">
-    <span class="seal" aria-hidden="true"></span>
-    <span>Questionnaire</span>
-  </a>
-  <div class="docs-nav__links">
-    <a href="/">Live demo</a>
-    <a href="/docs/get-started/">Get started</a>
-    <a href="/docs/artifact-model/">Artifacts</a>
-    <a href="https://github.com/srinitude/questionnaire">GitHub</a>
-  </div>
+  {sections.map((section) => (
+    <a class="docs-strip-item" href={section.href}>
+      <span class={`docs-strip-icon ${section.icon}`} aria-hidden="true"></span>
+      <span class="docs-strip-copy">
+        <strong>{section.title}</strong>
+        <span>{section.subtitle}</span>
+      </span>
+    </a>
+  ))}
 </nav>

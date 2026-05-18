@@ -39,10 +39,10 @@ Each run contains a copied browser-ready frontend (`index.html`), the source-of-
 python3 scripts/start-questionnaire.py
 ```
 
-Use `--project-dir <path>` when the intended project root is not the current working directory. Use `--open` or `--no-open` for non-interactive runs.
+Use `--project-dir <path>` when the intended project root is not the current working directory. The initializer opens the generated `index.html` immediately by default; use `--no-open` only for headless or automation runs.
 
 2. Rewrite the starter question in `state.json` for the user's actual task before presenting it.
-3. Present the active question in chat and optionally point to the generated `index.html`.
+3. Confirm the generated `index.html` opened in the browser, then present the active question in chat.
 4. After each answer, update `state.json` and append to `transcript.md`.
 5. If the answer creates reusable terminology, update `CONTEXT.md`.
 6. If the answer introduces external facts or constraints, search when possible and write `research/<question-slug>.md`.
