@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Questionnaire">
+  <rect width="64" height="64" rx="16" fill="#06120d"/>
+  <circle cx="32" cy="32" r="19" fill="#9b6a32"/>
+  <circle cx="26" cy="24" r="7" fill="#f4e9c8" opacity=".72"/>
+  <path d="M23 39h18" stroke="#06120d" stroke-width="5" stroke-linecap="round"/>
+</svg>
+*** Add File: /Users/kiren/Documents/Unaffiliated/questionnaire/site/public/og/questionnaire-og.svg
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Questionnaire Agent Skill social preview">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#030806"/>
+      <stop offset=".52" stop-color="#06120d"/>
+      <stop offset="1" stop-color="#0f3028"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".22" cy=".08" r=".7">
+      <stop offset="0" stop-color="#e07a24" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#e07a24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g opacity=".16">
+    <path d="M0 118h1200M0 238h1200M0 358h1200M0 478h1200" stroke="#e9d8af"/>
+    <path d="M180 0v630M360 0v630M540 0v630M720 0v630M900 0v630M1080 0v630" stroke="#e9d8af"/>
+  </g>
+  <g transform="translate(70 66)">
+    <rect width="1060" height="498" rx="34" fill="#0a1b14" stroke="#e9d8af" stroke-opacity=".18" stroke-width="2"/>
+    <rect x="22" y="22" width="1016" height="454" rx="25" fill="#06120d" stroke="#9b6a32" stroke-opacity=".42"/>
+    <circle cx="68" cy="68" r="22" fill="#9b6a32"/>
+    <circle cx="60" cy="58" r="8" fill="#f4e9c8" opacity=".75"/>
+    <text x="110" y="75" fill="#e9d8af" font-family="Georgia, serif" font-size="34">Questionnaire</text>
+    <text x="78" y="182" fill="#f4e9c8" font-family="Georgia, serif" font-size="72">Interrogate decisions</text>
+    <text x="78" y="262" fill="#f4e9c8" font-family="Georgia, serif" font-size="72">until they leave artifacts.</text>
+    <text x="82" y="326" fill="#b99d67" font-family="Aptos, Segoe UI, sans-serif" font-size="25">state.json · transcript.md · CONTEXT.md · research/ · adrs/</text>
+    <g transform="translate(725 116)">
+      <rect width="240" height="246" rx="22" fill="#0f3028" stroke="#e9d8af" stroke-opacity=".2"/>
+      <text x="28" y="56" fill="#c08a43" font-family="Aptos, Segoe UI, sans-serif" font-size="17" font-weight="700">ACTIVE QUESTION</text>
+      <text x="28" y="104" fill="#f4e9c8" font-family="Georgia, serif" font-size="31">Should this</text>
+      <text x="28" y="142" fill="#f4e9c8" font-family="Georgia, serif" font-size="31">decision become</text>
+      <text x="28" y="180" fill="#f4e9c8" font-family="Georgia, serif" font-size="31">an artifact?</text>
+      <rect x="28" y="202" width="150" height="28" rx="14" fill="#c08a43"/>
+    </g>
+  </g>
+</svg>

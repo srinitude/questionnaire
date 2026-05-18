@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import DocsNav from "../../components/DocsNav.astro";
+import { docs, findDoc } from "../../data/docs";
+
+export function getStaticPaths() {
+  return docs.map((doc) => ({ params: { slug: doc.slug }, props: { doc } }));
+}
+
+const doc = Astro.props.doc ?? findDoc(Astro.params.slug ?? "");
+if (!doc) {
+  return Astro.redirect("/docs/get-started/");
+}
+
+const title = `${doc.title} | Questionnaire docs`;
+const description = doc.summary;
+---
+
+<BaseLayout title={title} description={description} canonicalPath={`/docs/${doc.slug}/`} bodyClass="docs-page">
+  <DocsNav />
+  <main class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Documentation sections">
+      {docs.map((item) => (
+        <a class={item.slug === doc.slug ? "active" : ""} href={`/docs/${item.slug}/`}>{item.title}</a>
+      ))}
+    </aside>
+    <article class="docs-article">
+      <p class="eyebrow">Questionnaire docs</p>
+      <h1>{doc.title}</h1>
+      <p class="docs-summary">{doc.summary}</p>
+      {doc.body.map((paragraph) => <p>{paragraph}</p>)}
+      <div class="docs-next">
+        <a href="/">Return to live demo</a>
+        <a href="https://github.com/srinitude/questionnaire">View source</a>
+      </div>
+    </article>
+  </main>
+</BaseLayout>

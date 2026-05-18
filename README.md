@@ -45,6 +45,8 @@ npx skills add srinitude/questionnaire --list
 │   ├── questionnaire-journeys.md
 │   └── ui-design-system.yaml
 ├── requirements.txt
+├── site/
+│   └── Astro documentation site for questionnaire.dev
 └── scripts/
     ├── start-questionnaire.py
     └── validate-questionnaire-state.py
@@ -113,6 +115,19 @@ python3 scripts/validate-questionnaire-state.py path/to/.questionnaire/<timestam
 ```
 
 The same checks run in GitHub Actions for pushes and pull requests.
+
+## Website
+
+The public site lives in `site/` as an isolated static Astro app. It includes a browser-local demo that uses the same `state.json` shape, autosaves to `localStorage`, validates imports, and exports JSON or transcript files. Browser drafts stay local; real filesystem writes are still handled by the agent in a project run.
+
+```bash
+cd site
+npm install
+npm run test
+npm run build
+```
+
+The site publishes SEO and sharing assets including canonical metadata, Open Graph/Twitter tags, structured data, `robots.txt`, `sitemap-index.xml`, `llms.txt`, and a first-party social image at `/og/questionnaire-og.svg`.
 
 ## Requirements
 

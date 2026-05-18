@@ -6,4 +6,8 @@ __pycache__/
 .env.*
 dist/
 build/
+node_modules/
+site/node_modules/
+site/dist/
+site/.astro/
 .questionnaire/

@@ -1,0 +1,34 @@
+# Questionnaire
+
+> Evidence-aware Agent Skill for guided decision questionnaires.
+
+Questionnaire helps agents run one-question-at-a-time decision interviews while keeping durable project-local artifacts: `state.json`, `transcript.md`, `CONTEXT.md`, `research/`, and `adrs/`.
+
+The public website includes a browser-local demo. The demo can draft, autosave to `localStorage`, validate, import, and export state, but filesystem writes are agent-managed in real skill usage.
+
+## Core URLs
+
+- Home and live browser demo: https://questionnaire.dev/
+- Get started: https://questionnaire.dev/docs/get-started/
+- Artifact model: https://questionnaire.dev/docs/artifact-model/
+- State schema: https://questionnaire.dev/docs/state-schema/
+- Question types: https://questionnaire.dev/docs/question-types/
+- Agent workflow: https://questionnaire.dev/docs/agent-workflow/
+- Browser demo boundaries: https://questionnaire.dev/docs/browser-demo-boundaries/
+- Validation: https://questionnaire.dev/docs/validation/
+- Security and privacy: https://questionnaire.dev/docs/security-privacy/
+- Contributing: https://questionnaire.dev/docs/contributing/
+
+## Source
+
+- GitHub repository: https://github.com/srinitude/questionnaire
+- Skill package entrypoint: https://github.com/srinitude/questionnaire/blob/main/SKILL.md
+- Standalone frontend template: https://github.com/srinitude/questionnaire/blob/main/assets/questionnaire-template.html
+- UI design tokens: https://github.com/srinitude/questionnaire/blob/main/references/ui-design-system.yaml
+- Journey reference: https://github.com/srinitude/questionnaire/blob/main/references/questionnaire-journeys.md
+
+## Install
+
+```bash
+npx skills add srinitude/questionnaire
+```

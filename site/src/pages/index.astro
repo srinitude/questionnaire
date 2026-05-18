@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { docs } from "../data/docs";
+import { defaultSeo } from "../data/seo";
+---
+
+<BaseLayout bodyClass="home-page" title={defaultSeo.title} description={defaultSeo.description}>
+  <main class="app-shell" data-questionnaire-demo>
+    <header class="topbar" aria-label="Site header">
+      <a class="brand" href="/" aria-label="Questionnaire home">
+        <span class="seal" aria-hidden="true"></span>
+        <span>
+          <strong>Questionnaire</strong>
+          <small>Agent Skill decision run</small>
+        </span>
+      </a>
+      <nav class="topnav" aria-label="Primary">
+        <a href="#demo">Demo</a>
+        <a href="#artifacts">Artifacts</a>
+        <a href="/docs/get-started/">Docs</a>
+        <a href="https://github.com/srinitude/questionnaire">GitHub</a>
+      </nav>
+      <div class="statusline"><span class="dot" aria-hidden="true"></span><span data-save-status>Local draft ready</span></div>
+    </header>
+
+    <section class="hero" id="demo" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Browser-local skill demo</p>
+        <h1 id="hero-title">Interrogate the decision until it leaves artifacts.</h1>
+        <p class="hero-lede">
+          A real questionnaire run surface: one active question, recommended answer, rationale, local state,
+          transcript export, and an honest boundary between browser drafts and agent-written files.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#run-panel">Try the run<span aria-hidden="true">↗</span></a>
+          <a class="button button-secondary" href="/docs/artifact-model/">Study artifacts</a>
+        </div>
+      </div>
+      <div class="hero-proof" aria-label="Approved behavior">
+        <span>state.json schema</span>
+        <span>localStorage autosave</span>
+        <span>JSON import/export</span>
+        <span>agent-managed filesystem</span>
+      </div>
+    </section>
+
+    <section class="run-grid" id="run-panel">
+      <aside class="panel rail trail-rail" aria-label="Artifact trail">
+        <div class="panel-core">
+          <p class="eyebrow">Trail</p>
+          <h2>Run artifacts</h2>
+          <div class="artifact-list" data-artifacts></div>
+          <div class="rail-note">
+            Browser state stays here until you export it. In the real skill, the agent writes the run directory.
+          </div>
+        </div>
+      </aside>
+
+      <section class="panel question-panel" aria-label="Active questionnaire question">
+        <div class="panel-core">
+          <div class="question-meta">
+            <span data-question-counter>Question 1 of 3</span>
+            <span data-validation-state>Valid state</span>
+          </div>
+          <p class="eyebrow">Active question</p>
+          <h2 data-question-prompt>Loading question...</h2>
+          <div class="recommendation">
+            <strong>Recommended answer</strong>
+            <p data-question-recommendation></p>
+          </div>
+          <div class="why">
+            <strong>Why it matters</strong>
+            <p data-question-why></p>
+          </div>
+          <div class="options" data-question-options></div>
+          <label class="answer-label" for="answer-input">Your answer</label>
+          <textarea id="answer-input" data-answer-input rows="5" placeholder="Write a specific answer. The demo autosaves locally."></textarea>
+          <div class="question-actions">
+            <button class="button button-primary" type="button" data-answer-button>Answer and advance<span aria-hidden="true">↗</span></button>
+            <button class="button button-secondary" type="button" data-reset-button>Reset draft</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel rail context-rail" aria-label="Context and export">
+        <div class="panel-core">
+          <p class="eyebrow">Context</p>
+          <h2>Filesystem boundary</h2>
+          <p>
+            The browser can draft, validate, import, and export. The agent writes durable files:
+            <code>state.json</code>, <code>transcript.md</code>, <code>CONTEXT.md</code>, research notes, and ADRs.
+          </p>
+          <div class="export-stack">
+            <button type="button" class="button button-secondary" data-export-json>Export JSON</button>
+            <button type="button" class="button button-secondary" data-export-transcript>Export transcript</button>
+            <label class="import-control">
+              <span>Import state.json</span>
+              <input type="file" data-import-json accept="application/json,.json" />
+            </label>
+          </div>
+          <output class="import-status" data-import-status>Ready for import or export.</output>
+        </div>
+      </aside>
+    </section>
+
+    <section class="docs-band" id="artifacts" aria-labelledby="docs-title">
+      <div class="section-heading">
+        <p class="eyebrow">Operator docs</p>
+        <h2 id="docs-title">Concise docs around the run, not a separate brochure.</h2>
+        <p>Each route answers a decision a serious adopter needs before installing the skill.</p>
+      </div>
+      <div class="docs-grid">
+        {docs.map((doc) => (
+          <a class="doc-card" href={`/docs/${doc.slug}/`}>
+            <span>{doc.title}</span>
+            <p>{doc.summary}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+  <script src="../scripts/demo.ts"></script>
+</BaseLayout>
