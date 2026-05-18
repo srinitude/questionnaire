@@ -54,4 +54,16 @@ describe("questionnaire demo state", () => {
     expect(transcript).toContain("Answer: Use it for architecture reviews.");
     expect(transcript).toContain("Decision: Capture the core problem");
   });
+
+  it("marks the run complete after the final answer without dropping the active question", () => {
+    let state = seedQuestionnaireState();
+
+    state.questions.forEach((question, index) => {
+      state = answerCurrentQuestion(state, `Answer ${index + 1}: ${question.prompt}`);
+    });
+
+    expect(state.run.status).toBe("complete");
+    expect(state.current_question).toBe("q-success-criteria");
+    expect(validateQuestionnaireState(state).valid).toBe(true);
+  });
 });

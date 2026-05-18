@@ -394,6 +394,7 @@ export function answerCurrentQuestion(state: QuestionnaireState, answer: string)
   } else {
     next.current_question = current.id;
     current.status = "active";
+    next.run.status = "complete";
   }
 
   return next;

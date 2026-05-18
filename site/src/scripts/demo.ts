@@ -4,6 +4,8 @@ import {
   exportTranscript,
   importQuestionnaireState,
   seedQuestionnaireState,
+  type QuestionnaireQuestion,
+  type QuestionOption,
   type QuestionnaireState,
   validateQuestionnaireState,
 } from "../lib/questionnaire-state";
@@ -19,6 +21,8 @@ const answerInput = document.querySelector<HTMLTextAreaElement>("[data-answer-in
 const answerButton = document.querySelector<HTMLButtonElement>("[data-answer-button]");
 const resetButtons = document.querySelectorAll<HTMLButtonElement>("[data-reset-button]");
 const skipButton = document.querySelector<HTMLButtonElement>("[data-skip-button]");
+const whyToggle = document.querySelector<HTMLButtonElement>("[data-why-toggle]");
+const whyBlock = document.querySelector<HTMLElement>("[data-why-block]");
 const artifactsEl = document.querySelector<HTMLElement>("[data-artifacts]");
 const counterEl = document.querySelector<HTMLElement>("[data-question-counter]");
 const validationEl = document.querySelector<HTMLElement>("[data-validation-state]");
@@ -57,6 +61,7 @@ function render(): void {
   const question = activeQuestion();
   const activeIndex = state.questions.findIndex((candidate) => candidate.id === question.id);
   const validation = validateQuestionnaireState(state);
+  const isComplete = state.run.status === "complete";
 
   if (promptEl) promptEl.textContent = question.prompt;
   if (recommendationEl) recommendationEl.textContent = question.recommended_answer;
@@ -64,19 +69,32 @@ function render(): void {
   if (counterEl) counterEl.textContent = `Question ${activeIndex + 1} of ${state.questions.length}`;
   if (validationEl) validationEl.textContent = validation.valid ? "Valid state" : `${validation.errors.length} state issue`;
   if (answerInput) answerInput.value = question.user_answer || question.recommended_answer;
+  if (answerButton) {
+    answerButton.disabled = isComplete;
+    answerButton.innerHTML = isComplete ? "Run complete" : `Save & continue<span aria-hidden="true">→</span>`;
+  }
+  if (skipButton) skipButton.disabled = isComplete;
 
   if (optionsEl) {
     optionsEl.innerHTML = "";
+    optionsEl.hidden = question.options.length === 0;
     question.options.forEach((option) => {
       const button = document.createElement("button");
       button.type = "button";
       button.className = "option-button";
+      if (optionSelected(question, option)) {
+        button.classList.add("is-selected");
+        button.setAttribute("aria-pressed", "true");
+      } else {
+        button.setAttribute("aria-pressed", "false");
+      }
       button.innerHTML = `<strong>${option.label}</strong><span>${option.description}</span>`;
       button.addEventListener("click", () => {
         if (answerInput) {
-          answerInput.value = `${option.label}: ${option.description}`;
+          answerInput.value = updateAnswerFromOption(question, option);
           question.user_answer = answerInput.value;
           saveState();
+          render();
         }
       });
       optionsEl.append(button);
@@ -85,6 +103,32 @@ function render(): void {
 
   renderRunSteps(activeIndex);
   renderArtifacts();
+}
+
+function optionSelected(question: QuestionnaireQuestion, option: Pick<QuestionOption, "label">): boolean {
+  return (question.user_answer || "").includes(option.label);
+}
+
+function updateAnswerFromOption(question: QuestionnaireQuestion, option: Pick<QuestionOption, "label" | "description">): string {
+  const line = `${option.label}: ${option.description}`;
+
+  if (question.answer_type === "multi_choice") {
+    const current = question.options
+      .filter((candidate) => (question.user_answer || "").includes(candidate.label))
+      .map((candidate) => `${candidate.label}: ${candidate.description}`);
+    const next = current.includes(line) ? current.filter((item) => item !== line) : [...current, line];
+    return next.map((item) => `- ${item}`).join("\n");
+  }
+
+  if (question.answer_type === "ranked_choice") {
+    const current = question.options
+      .filter((candidate) => (question.user_answer || "").includes(candidate.label))
+      .map((candidate) => `${candidate.label}: ${candidate.description}`);
+    const next = current.includes(line) ? current.filter((item) => item !== line) : [...current, line];
+    return next.map((item, index) => `${index + 1}. ${item}`).join("\n");
+  }
+
+  return line;
 }
 
 function renderRunSteps(activeIndex: number): void {
@@ -174,6 +218,14 @@ answerButton?.addEventListener("click", () => {
   state = answerCurrentQuestion(state, answer);
   saveState();
   render();
+});
+
+whyToggle?.addEventListener("click", () => {
+  if (!whyBlock || !whyToggle) return;
+  const isExpanded = whyToggle.getAttribute("aria-expanded") === "true";
+  whyToggle.setAttribute("aria-expanded", String(!isExpanded));
+  whyToggle.textContent = isExpanded ? "Why this answer?" : "Hide rationale";
+  whyBlock.hidden = isExpanded;
 });
 
 resetButtons.forEach((resetButton) => resetButton.addEventListener("click", () => {

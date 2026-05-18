@@ -47,7 +47,7 @@ describe("screenshot-led visual contract", () => {
   it("defines the engraved desk visual system in CSS", () => {
     const css = readFileSync(join(process.cwd(), "src/styles/global.css"), "utf8");
 
-    ["desk-stage", "workbench", "brass-plate", "overflow: hidden"].forEach((className) => {
+    ["desk-stage", "workbench", "brass-plate", "overflow: clip"].forEach((className) => {
       expect(css).toContain(className);
     });
   });
