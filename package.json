@@ -1,0 +1,27 @@
+{
+  "name": "@srinitude/questionnaire",
+  "version": "0.1.0",
+  "description": "Use when the user wants a guided decision questionnaire, setup interview, plan stress-test, structured intake, or docs-aware decision workflow. Creates a run-scoped browser-ready q",
+  "license": "Apache-2.0",
+  "author": "Kiren Srinivasan <kiren@fantasymetals.com>",
+  "homepage": "https://github.com/srinitude/questionnaire#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srinitude/questionnaire.git"
+  },
+  "bugs": {
+    "url": "https://github.com/srinitude/questionnaire/issues"
+  },
+  "keywords": [
+    "agent-skill",
+    "skills.sh",
+    "questionnaire"
+  ],
+  "files": [
+    "skills/",
+    "skills-lock.json",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ]
+}

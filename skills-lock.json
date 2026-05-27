@@ -1,0 +1,14 @@
+{
+  "skills": [
+    {
+      "name": "questionnaire",
+      "version": "0.1.0",
+      "path": "skills/questionnaire",
+      "description": "Use when the user wants a guided decision questionnaire, setup interview, plan stress-test, structured intake, or docs-aware decision workflow. Creates a run-scoped browser-ready questionnaire frontend plus state, transcript, glossary, research notes, and ADR artifacts while asking one firm, evidence-aware question at a time.",
+      "tags": [
+        "agent-skill",
+        "skills.sh"
+      ]
+    }
+  ]
+}

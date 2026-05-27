@@ -1,6 +1,6 @@
 # Questionnaire
 
-[![skills.sh compatible](https://img.shields.io/badge/skills.sh-compatible-111111?style=flat-square)](https://skills.sh/s/srinitude/questionnaire)
+[![skills.sh](https://skills.sh/b/srinitude/questionnaire)](https://skills.sh/s/srinitude/questionnaire)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Validate](https://github.com/srinitude/questionnaire/actions/workflows/validate.yml/badge.svg)](https://github.com/srinitude/questionnaire/actions/workflows/validate.yml)
 
@@ -31,25 +31,30 @@ npx skills add srinitude/questionnaire --list
 ## Package Structure
 
 ```text
-.
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-├── assets/
-│   └── questionnaire-template.html
-├── evals/
-│   └── evals.json
-├── references/
-│   ├── agent-skills-compliance.md
-│   ├── question-generation-primitives.md
-│   ├── questionnaire-journeys.md
-│   └── ui-design-system.yaml
-├── requirements.txt
-├── site/
-│   └── Astro documentation site for questionnaire.dev
-└── scripts/
-    ├── start-questionnaire.py
-    └── validate-questionnaire-state.py
+questionnaire/
+|-- skills/
+|   `-- questionnaire/
+|       |-- agents/
+|       |   `-- openai.yaml
+|       |-- assets/
+|       |   `-- questionnaire-template.html
+|       |-- evals/
+|       |   `-- evals.json
+|       |-- references/
+|       |   |-- agent-skills-compliance.md
+|       |   |-- question-generation-primitives.md
+|       |   |-- questionnaire-journeys.md
+|       |   `-- ui-design-system.yaml
+|       |-- scripts/
+|       |   |-- start-questionnaire.py
+|       |   `-- validate-questionnaire-state.py
+|       |-- requirements.txt
+|       `-- SKILL.md
+|-- skills-lock.json
+|-- package.json
+|-- README.md
+|-- LICENSE
+`-- NOTICE
 ```
 
 ## Usage
@@ -57,13 +62,13 @@ npx skills add srinitude/questionnaire --list
 From a project root:
 
 ```bash
-python3 scripts/start-questionnaire.py
+python3 skills/questionnaire/scripts/start-questionnaire.py
 ```
 
 For non-interactive agent or test runs:
 
 ```bash
-python3 scripts/start-questionnaire.py \
+python3 skills/questionnaire/scripts/start-questionnaire.py \
   --project-dir /path/to/project \
   --timestamp 2026-05-18:09-30-00 \
   --no-open
@@ -88,30 +93,30 @@ The initializer creates:
 Validate the skill package:
 
 ```bash
-skills-ref validate "$PWD"
+skills-ref validate "$PWD/skills/questionnaire"
 ```
 
 If `skills-ref` is not installed:
 
 ```bash
 git clone --depth 1 https://github.com/agentskills/agentskills /tmp/agentskills
-uv run --project /tmp/agentskills/skills-ref skills-ref validate "$PWD"
+uv run --project /tmp/agentskills/skills-ref skills-ref validate "$PWD/skills/questionnaire"
 ```
 
 Validate the bundled scripts and resources:
 
 ```bash
-python3 -m py_compile scripts/start-questionnaire.py scripts/validate-questionnaire-state.py
-python3 scripts/start-questionnaire.py --help
-python3 scripts/validate-questionnaire-state.py --help
-python3 -m json.tool evals/evals.json >/dev/null
-uv run --with-requirements requirements.txt python -c "import yaml; yaml.safe_load(open('references/ui-design-system.yaml'))"
+python3 -m py_compile skills/questionnaire/scripts/start-questionnaire.py skills/questionnaire/scripts/validate-questionnaire-state.py
+python3 skills/questionnaire/scripts/start-questionnaire.py --help
+python3 skills/questionnaire/scripts/validate-questionnaire-state.py --help
+python3 -m json.tool skills/questionnaire/evals/evals.json >/dev/null
+uv run --with-requirements skills/questionnaire/requirements.txt python -c "import yaml; yaml.safe_load(open('skills/questionnaire/references/ui-design-system.yaml'))"
 ```
 
 Validate a generated run state:
 
 ```bash
-python3 scripts/validate-questionnaire-state.py path/to/.questionnaire/<timestamp>/state.json
+python3 skills/questionnaire/scripts/validate-questionnaire-state.py path/to/.questionnaire/<timestamp>/state.json
 ```
 
 The same checks run in GitHub Actions for pushes and pull requests.
@@ -132,7 +137,7 @@ The site publishes SEO and sharing assets including canonical metadata, Open Gra
 ## Requirements
 
 - Python 3.9 or newer.
-- PyYAML for repository YAML validation, installed from `requirements.txt`, through `uv`, or through an existing Python environment.
+- PyYAML for repository YAML validation, installed from `skills/questionnaire/requirements.txt`, through `uv`, or through an existing Python environment.
 
 The runtime scripts themselves use only the Python standard library.
 
@@ -140,7 +145,7 @@ The runtime scripts themselves use only the Python standard library.
 
 Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
 
-Please keep changes focused on the portable skill package: update `SKILL.md` for runbook behavior, `references/` for long-form guidance and design tokens, `assets/` for the frontend template, and `scripts/` for deterministic automation or validation.
+Please keep changes focused on the portable skill package: update `skills/questionnaire/SKILL.md` for runbook behavior, `skills/questionnaire/references/` for long-form guidance and design tokens, `skills/questionnaire/assets/` for the frontend template, and `skills/questionnaire/scripts/` for deterministic automation or validation.
 
 ## Security
 

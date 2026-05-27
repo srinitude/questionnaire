@@ -36,25 +36,25 @@ jobs:
       - name: Validate skill package
         run: |
           git clone --depth 1 https://github.com/agentskills/agentskills /tmp/agentskills
-          uv run --project /tmp/agentskills/skills-ref skills-ref validate "$PWD"
+          uv run --project /tmp/agentskills/skills-ref skills-ref validate "$PWD/skills/questionnaire"
 
       - name: Validate scripts
         run: |
-          python3 -m py_compile scripts/start-questionnaire.py scripts/validate-questionnaire-state.py
-          python3 scripts/start-questionnaire.py --help
-          python3 scripts/validate-questionnaire-state.py --help
+          python3 -m py_compile skills/questionnaire/scripts/start-questionnaire.py skills/questionnaire/scripts/validate-questionnaire-state.py
+          python3 skills/questionnaire/scripts/start-questionnaire.py --help
+          python3 skills/questionnaire/scripts/validate-questionnaire-state.py --help
 
       - name: Validate resources
         run: |
-          python3 -m json.tool evals/evals.json >/dev/null
-          uv run --with-requirements requirements.txt python -c "import yaml; yaml.safe_load(open('references/ui-design-system.yaml'))"
+          python3 -m json.tool skills/questionnaire/evals/evals.json >/dev/null
+          uv run --with-requirements skills/questionnaire/requirements.txt python -c "import yaml; yaml.safe_load(open('skills/questionnaire/references/ui-design-system.yaml'))"
 
       - name: Validate generated run state
         run: |
           tmpdir="$(mktemp -d)"
           mkdir -p "$tmpdir/app"
-          python3 scripts/start-questionnaire.py --project-dir "$tmpdir" --timestamp 2026-05-18:09-30-00 --no-open
-          python3 scripts/validate-questionnaire-state.py "$tmpdir/.questionnaire/2026-05-18:09-30-00/state.json"
+          python3 skills/questionnaire/scripts/start-questionnaire.py --project-dir "$tmpdir" --timestamp 2026-05-18:09-30-00 --no-open
+          python3 skills/questionnaire/scripts/validate-questionnaire-state.py "$tmpdir/.questionnaire/2026-05-18:09-30-00/state.json"
 
       - name: Validate skills CLI discovery
         run: npx skills add "$PWD" --list
